@@ -10,8 +10,8 @@ import sys
     ###### 
     # CONSTANTES
     ######
-pant_alt = 550 # pant_alt = pantalla_altura
-pant_anc = 1440 # pant_anc = pantalla_ancho
+pant_alt = 650 # pant_alt = pantalla_altura
+pant_anc = 1280 # pant_anc = pantalla_ancho
 
     ###### 
     # NO CONSTANTES hola soy el mascapito
@@ -29,15 +29,6 @@ pygame.display.set_caption("Botecitos 'El juego'")
 
 # fdpi = fondo de pantalla inicial
 fdpi = pygame.image.load("./recursos/imagenes/fondo_pantalla_inicial.png").convert_alpha()
-
-VT.blit(fdpi, (0, -100))
-pygame.display.flip() # se muestran lo cambios en pantalla
-
-# Codigo para cerrar la ventana                                                    
-while 1 == 1:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            sys.exit()
 
 # Importacion de Fuente
 def get_font(fuente_T): # fuente_T = Tamaño de la fuente 
@@ -97,18 +88,18 @@ def options():
 
 def main_menu():
     while True:
-        VT.blit(BG, (0, 0))
+        VT.blit(fdpi, (0, 0))
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
         MENU_TEXT = get_font(100).render("MAIN MENU", True, "#b68f40")
         MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
 
-        PLAY_BUTTON = Boton(image=pygame.image.load("assets/Play Rect.png"), pos=(640, 250), 
+        PLAY_BUTTON = Boton(image=pygame.image.load("./recursos/imagenes/Play Rect.png"), pos=(640, 250), 
                             text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        OPTIONS_BUTTON = Boton(image=pygame.image.load("assets/Options Rect.png"), pos=(640, 400), 
+        OPTIONS_BUTTON = Boton(image=pygame.image.load("./recursos/imagenes/Options Rect.png"), pos=(640, 400), 
                             text_input="OPTIONS", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        QUIT_BUTTON = Boton(image=pygame.image.load("assets/Quit Rect.png"), pos=(640, 550), 
+        QUIT_BUTTON = Boton(image=pygame.image.load("./recursos/imagenes/Quit Rect.png"), pos=(640, 550), 
                             text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
 
         VT.blit(MENU_TEXT, MENU_RECT)
