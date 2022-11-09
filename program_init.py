@@ -14,7 +14,7 @@ pant_alt = 550 # pant_alt = pantalla_altura
 pant_anc = 1440 # pant_anc = pantalla_ancho
 
     ###### 
-    # NO CONSTANTES
+    # NO CONSTANTES hola soy el mascapito
     ######
 
 #####
