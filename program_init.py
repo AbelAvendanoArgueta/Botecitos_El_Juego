@@ -1,7 +1,7 @@
-import pygame
-from pygame.locals import *
-from boton import Boton
 import sys
+import pygame
+from boton import Boton
+from pygame.locals import *
 
 #####
 # VARIABLES
@@ -36,7 +36,7 @@ fdpi = pygame.image.load("./recursos/imagenes/fondo_pantalla_inicial.png").conve
 def tomar_fuente(fuente_T): # fuente_T = Tamaño de la fuente 
     return pygame.font.Font("./recursos/tipografia/fuente.ttf", fuente_T) # Se importa la fuente, y se pasa la variable "fuente_T" para definir tamaño de la fuente
 
-def jugar():
+def boton_jugar():
     while True: # Se define ciclica la siguiente parte del codigo
         # cur_pos = posición del cursor
         cur_pos = pygame.mouse.get_pos() # obtener la posición del cursor del mouse
@@ -67,53 +67,30 @@ def jugar():
                     main_menu()
 
         pygame.display.update()
-    
-def options():
-    while True:
-        OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
-
-        vt.fill("white")
-
-        OPTIONS_TEXT = tomar_fuente(45).render("This is the OPTIONS screen.", True, "Black")
-        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 260))
-        vt.blit(OPTIONS_TEXT, OPTIONS_RECT)
-
-        OPTIONS_BACK = Boton(image=None, pos=(640, 460), 
-                            text_input="BACK", font=tomar_fuente(75), base_color="Black", hovering_color="Green")
-
-        OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
-        OPTIONS_BACK.update(vt)
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
-                    main_menu()
-
-        pygame.display.update()
 
 def main_menu():
     while True:
         vt.blit(fdpi, (0, 0))
 
-        MENU_MOUSE_POS = pygame.mouse.get_pos()
+        menu_mouse_pos = pygame.mouse.get_pos()
 
-        MENU_TEXT = tomar_fuente(100).render("MAIN MENU", True, "#b68f40")
-        MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
+        # Texto Botecitos en pantalla inicial
+        botecitos_txt = tomar_fuente(75).render("BOTECITOS", True, "#eb606b")
+        botecitos_xy = botecitos_txt.get_rect(center=(640, 100))
+        vt.blit(botecitos_txt, botecitos_xy)
 
-        PLAY_BUTTON = Boton(image=pygame.image.load("./recursos/imagenes/Play Rect.png"), pos=(640, 250), 
-                            text_input="PLAY", font=tomar_fuente(75), base_color="#d7fcd4", hovering_color="White")
-        OPTIONS_BUTTON = Boton(image=pygame.image.load("./recursos/imagenes/Options Rect.png"), pos=(640, 400), 
-                            text_input="OPTIONS", font=tomar_fuente(75), base_color="#d7fcd4", hovering_color="White")
-        QUIT_BUTTON = Boton(image=pygame.image.load("./recursos/imagenes/Quit Rect.png"), pos=(640, 550), 
-                            text_input="QUIT", font=tomar_fuente(75), base_color="#d7fcd4", hovering_color="White")
+        eljogo_txt = tomar_fuente(75).render("'El Juego'", True, "#eb606b")
+        eljogo_xy = eljogo_txt.get_rect(center=(640, 200))
+        vt.blit(eljogo_txt, eljogo_xy)
 
-        vt.blit(MENU_TEXT, MENU_RECT)
+        btn_jugar = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(640, 350), 
+                            text_input="Jugar", font=tomar_fuente(70), base_color="White", hovering_color="#f7eb95")
+        btn_salir = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(640, 475), 
+                            text_input="Salir", font=tomar_fuente(70), base_color="White", hovering_color="#f7eb95")
+                            
 
-        for button in [PLAY_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
-            button.changeColor(MENU_MOUSE_POS)
+        for button in [btn_jugar, btn_salir]:
+            button.changeColor(menu_mouse_pos)
             button.update(vt)
         
         for event in pygame.event.get():
@@ -121,11 +98,9 @@ def main_menu():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
-                    jugar()
-                if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
-                    options()
-                if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS):
+                if btn_jugar.checkForInput(menu_mouse_pos):
+                    boton_jugar()
+                if btn_salir.checkForInput(menu_mouse_pos):
                     pygame.quit()
                     sys.exit()
 
