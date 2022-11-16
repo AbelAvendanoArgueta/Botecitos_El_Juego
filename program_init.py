@@ -15,7 +15,7 @@ pant_alt = 650 # pant_alt = pantalla_altura
 pant_anc = 1280 # pant_anc = pantalla_ancho
 
     ###### 
-    # NO CONSTANTES
+    # NO CONSTANTES hola soy rama de pruebas
     ######
 
 
