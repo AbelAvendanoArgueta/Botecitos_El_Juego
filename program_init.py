@@ -1,8 +1,9 @@
+# Abel Fernando Avendaño Argueta
+
 import sys
 import pygame
 from boton import Boton
 from pygame.locals import *
-
 #abel: el lic se nos va morir.
 #1
 
