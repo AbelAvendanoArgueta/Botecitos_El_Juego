@@ -3,8 +3,8 @@ import pygame
 from boton import Boton
 from pygame.locals import *
 
-#aguante coban imperial campeon 2022 
-#misa s ela come 
+# los tres estamos trabajando en Github como unos campeones
+
 #####
 # VARIABLES
 #####
