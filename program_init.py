@@ -126,17 +126,13 @@ def boton_jugar_pve():
     while True: # Se define ciclica la siguiente parte del codigo
         # cur_pos = posición del cursor
         cur_pos = pygame.mouse.get_pos() # obtener la posición del cursor del mouse
-
-        fdpmdj = pygame.image.load("./recursos/imagenes/fondo_pantalla_inicial.png")
-        vt.blit(fdpmdj, (0, 0))
-
-        menu_mouse_pos = pygame.mouse.get_pos()
+        vt.blit(fdpi, (0, 0))
         
         jtxt_retornar = Boton(image=None, pos=(140, 620), 
                             text_input="retornar", font=tomar_fuente(30), base_color="White", hovering_color="Red")
         
-        comenzar_jugar = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(1100, 590), 
-                            text_input="Comenzar Juego", font=tomar_fuente(20), base_color="White", hovering_color="#f7eb95")
+        comenzar_jugar = Boton(image=None, pos=(1050, 620), 
+                            text_input="Comenzar Juego", font=tomar_fuente(30), base_color="White", hovering_color="Green")
 
         for button in [jtxt_retornar, comenzar_jugar]:
             button.changeColor(cur_pos)
@@ -183,7 +179,7 @@ def boton_jugar_pvp():
 
 def ventana_pruebas():
     while True:
-        vt.blit(fdpi, (0, 0))
+        vt.fill("orange")
         cur_pos = pygame.mouse.get_pos()
 
         # Texto Pruebas
@@ -193,7 +189,10 @@ def ventana_pruebas():
 
         jtxt_retornar = Boton(image=None, pos=(140, 620), 
                         text_input="retornar", font=tomar_fuente(30), base_color="White", hovering_color="Red")
-            
+        
+        #
+        #
+
         for button in [jtxt_retornar]:
                 button.changeColor(cur_pos)
                 button.update(vt)
