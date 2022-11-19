@@ -95,12 +95,12 @@ def boton_jugar():
         btn_jugar_pvp = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(965, 215), 
                             text_input="PVP", font=tomar_fuente(70), base_color="White", hovering_color="Green")
         
+        jtxt_retornar = Boton(image=None, pos=(640, 565), 
+                            text_input="retornar", font=tomar_fuente(65), base_color="White", hovering_color="Red")
+
         for button in [btn_jugar_pve, btn_jugar_pvp]:
             button.changeColor(menu_mouse_pos)
             button.update(vt)
-
-        jtxt_retornar = Boton(image=None, pos=(640, 565), 
-                            text_input="retornar", font=tomar_fuente(65), base_color="White", hovering_color="Red")
 
         jtxt_retornar.changeColor(cur_pos)
         jtxt_retornar.update(vt)
@@ -112,8 +112,80 @@ def boton_jugar():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if jtxt_retornar.checkForInput(cur_pos):
                     main_menu()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if btn_jugar_pve.checkForInput(menu_mouse_pos):
+                    boton_jugar_pve()
+                if btn_jugar_pvp.checkForInput(menu_mouse_pos):
+                    boton_jugar_pvp()
+     
+        pygame.display.update()
+
+def boton_jugar_pve():
+    while True: # Se define ciclica la siguiente parte del codigo
+        # cur_pos = posición del cursor
+        cur_pos = pygame.mouse.get_pos() # obtener la posición del cursor del mouse
+
+        # funcion fill no ayudara a cambiar el color de la pantalla luego que demos click en alguna función
+        # color_opc = (94, 126, 181) # color_opc sera el que se usara luego de dar click en una opcion
+        # vt.fill(color_opc) # se pasa color_opc como parametro
+        # fdpmdj = fondo de pantalla de ventana modo de juego
+        fdpmdj = pygame.image.load("./recursos/imagenes/fondo_pantalla_inicial.png")
+        vt.blit(fdpmdj, (0, 0))
+
+        menu_mouse_pos = pygame.mouse.get_pos()
+        
+        jtxt_retornar = Boton(image=None, pos=(640, 565), 
+                            text_input="retornar", font=tomar_fuente(65), base_color="White", hovering_color="Red")
+
+        #for button in [btn_jugar_pve, btn_jugar_pvp]:
+        #    button.changeColor(menu_mouse_pos)
+        #   button.update(vt)
+
+        jtxt_retornar.changeColor(cur_pos)
+        jtxt_retornar.update(vt)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if jtxt_retornar.checkForInput(cur_pos):
+                    boton_jugar()
 
         pygame.display.update()
+
+def boton_jugar_pvp():
+    while True: # Se define ciclica la siguiente parte del codigo
+        # cur_pos = posición del cursor
+        cur_pos = pygame.mouse.get_pos() # obtener la posición del cursor del mouse
+
+        # funcion fill no ayudara a cambiar el color de la pantalla luego que demos click en alguna función
+        # color_opc = (94, 126, 181) # color_opc sera el que se usara luego de dar click en una opcion
+        # vt.fill(color_opc) # se pasa color_opc como parametro
+        # fdpmdj = fondo de pantalla de ventana modo de juego
+        fdpmdj = pygame.image.load("./recursos/imagenes/fondo_pantalla_inicial.png")
+        vt.blit(fdpmdj, (0, 0))
+
+        menu_mouse_pos = pygame.mouse.get_pos()
+        
+        jtxt_retornar = Boton(image=None, pos=(640, 565), 
+                            text_input="retornar", font=tomar_fuente(65), base_color="White", hovering_color="Red")
+
+        #for button in [btn_jugar_pve, btn_jugar_pvp]:
+        #    button.changeColor(menu_mouse_pos)
+        #   button.update(vt)
+
+        jtxt_retornar.changeColor(cur_pos)
+        jtxt_retornar.update(vt)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if jtxt_retornar.checkForInput(cur_pos):
+                    boton_jugar()   
+        pygame.display.update()
+
 
 if __name__ == "__main__":
     main_menu()
