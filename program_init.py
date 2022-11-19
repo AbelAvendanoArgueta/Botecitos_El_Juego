@@ -36,6 +36,44 @@ fdpi = pygame.image.load("./recursos/imagenes/fondo_pantalla_inicial.png").conve
 def tomar_fuente(fuente_T): # fuente_T = Tamaño de la fuente 
     return pygame.font.Font("./recursos/tipografia/fuente.ttf", fuente_T) # Se importa la fuente, y se pasa la variable "fuente_T" para definir tamaño de la fuente
 
+def main_menu():
+    while True:
+        vt.blit(fdpi, (0, 0))
+
+        menu_mouse_pos = pygame.mouse.get_pos()
+
+        # Texto Botecitos en pantalla inicial
+        botecitos_txt = tomar_fuente(75).render("BOTECITOS", True, "#eb606b")
+        botecitos_xy = botecitos_txt.get_rect(center=(640, 100))
+        vt.blit(botecitos_txt, botecitos_xy)
+
+        eljogo_txt = tomar_fuente(75).render("'El Juego'", True, "#eb606b")
+        eljogo_xy = eljogo_txt.get_rect(center=(640, 200))
+        vt.blit(eljogo_txt, eljogo_xy)
+
+        btn_jugar = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(640, 350), 
+                            text_input="Jugar", font=tomar_fuente(70), base_color="White", hovering_color="#f7eb95")
+        btn_salir = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(640, 475), 
+                            text_input="Salir", font=tomar_fuente(70), base_color="White", hovering_color="#f7eb95")
+                            
+
+        for button in [btn_jugar, btn_salir]:
+            button.changeColor(menu_mouse_pos)
+            button.update(vt)
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if btn_jugar.checkForInput(menu_mouse_pos):
+                    boton_jugar()
+                if btn_salir.checkForInput(menu_mouse_pos):
+                    pygame.quit()
+                    sys.exit()
+
+        pygame.display.update()
+
 def boton_jugar():
     while True: # Se define ciclica la siguiente parte del codigo
         # cur_pos = posición del cursor
@@ -74,44 +112,6 @@ def boton_jugar():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if jtxt_retornar.checkForInput(cur_pos):
                     main_menu()
-
-        pygame.display.update()
-
-def main_menu():
-    while True:
-        vt.blit(fdpi, (0, 0))
-
-        menu_mouse_pos = pygame.mouse.get_pos()
-
-        # Texto Botecitos en pantalla inicial
-        botecitos_txt = tomar_fuente(75).render("BOTECITOS", True, "#eb606b")
-        botecitos_xy = botecitos_txt.get_rect(center=(640, 100))
-        vt.blit(botecitos_txt, botecitos_xy)
-
-        eljogo_txt = tomar_fuente(75).render("'El Juego'", True, "#eb606b")
-        eljogo_xy = eljogo_txt.get_rect(center=(640, 200))
-        vt.blit(eljogo_txt, eljogo_xy)
-
-        btn_jugar = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(640, 350), 
-                            text_input="Jugar", font=tomar_fuente(70), base_color="White", hovering_color="#f7eb95")
-        btn_salir = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(640, 475), 
-                            text_input="Salir", font=tomar_fuente(70), base_color="White", hovering_color="#f7eb95")
-                            
-
-        for button in [btn_jugar, btn_salir]:
-            button.changeColor(menu_mouse_pos)
-            button.update(vt)
-        
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if btn_jugar.checkForInput(menu_mouse_pos):
-                    boton_jugar()
-                if btn_salir.checkForInput(menu_mouse_pos):
-                    pygame.quit()
-                    sys.exit()
 
         pygame.display.update()
 
