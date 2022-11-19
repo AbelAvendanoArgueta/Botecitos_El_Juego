@@ -3,6 +3,9 @@ import pygame
 from boton import Boton
 from pygame.locals import *
 
+#abel: el lic se nos va morir.
+#1
+
 # los tres estamos trabajando en Github como unos campeones
 
 #####
