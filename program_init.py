@@ -41,28 +41,24 @@ def tomar_fuente(fuente_T): # fuente_T = Tamaño de la fuente
 def main_menu():
     while True:
         vt = pygame.display.set_mode((800,600))
-        cur_pos = pygame.mouse.get_pos()
+        cur_pos = pygame.mouse.get_pos()    
         fdpi = pygame.image.load("./recursos/imagenes/sec_rio/rio_1.png")
         vt.blit(fdpi, (0, 0))
 
         # Texto Botecitos en pantalla inicial
-        botecitos_txt = tomar_fuente(75).render("BOTECITOS", True, "#eb606b")
-        botecitos_xy = botecitos_txt.get_rect(center=(640, 100))
-        vt.blit(botecitos_txt, botecitos_xy)
+        titulo_juego = Boton(image=pygame.image.load("./recursos/imagenes/titulo_pant_inicial.png"), pos=(400, 150), 
+                            text_input="", font=tomar_fuente(70), base_color="White", hovering_color="#f7eb95")
+        
 
-        eljogo_txt = tomar_fuente(75).render("'El Juego'", True, "#eb606b")
-        eljogo_xy = eljogo_txt.get_rect(center=(640, 200))
-        vt.blit(eljogo_txt, eljogo_xy)
-
-        btn_jugar = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(640, 350), 
+        btn_jugar = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(400, 350), 
                             text_input="Jugar", font=tomar_fuente(70), base_color="White", hovering_color="#f7eb95")
-        btn_salir = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(640, 475), 
+        btn_salir = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(400, 475), 
                             text_input="Salir", font=tomar_fuente(70), base_color="White", hovering_color="#f7eb95")
-        btn_coders = Boton(image=None, pos=(1250, 620), 
+        btn_coders = Boton(image=None, pos=(770, 570), 
                             text_input="❯", font=tomar_fuente(30), base_color="#3daee9", hovering_color="Green")
              
 
-        for button in [btn_jugar, btn_salir, btn_coders]:
+        for button in [btn_jugar, btn_salir, btn_coders,titulo_juego]:
             button.changeColor(cur_pos)
             button.update(vt)
         
@@ -123,6 +119,7 @@ def boton_jugar():
 
 def caratula():
     while True:
+        vt = pygame.display.set_mode((pant_anc, pant_alt))
         cur_pos = pygame.mouse.get_pos()
         fdpmdj = pygame.image.load("./recursos/imagenes/caratula.png")
         vt.blit(fdpmdj, (0, 0))
