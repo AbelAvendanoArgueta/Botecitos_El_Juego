@@ -1,13 +1,8 @@
 # Abel Fernando Avendaño Argueta
 
-import sys
-import pygame
+import pygame, sys
 from boton import Boton
 from pygame.locals import *
-#abel: el lic se nos va morir.
-#1
-
-# los tres estamos trabajando en Github como unos campeones
 
 #####
 # VARIABLES
