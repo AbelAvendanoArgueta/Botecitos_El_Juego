@@ -21,7 +21,7 @@ pant_alt = 650 # pant_alt = pantalla_altura
 pant_anc = 1280 # pant_anc = pantalla_ancho
 
     ###### 
-    # NO CONSTANTES hola soy rama de pruebas
+    # NO CONSTANTES
     ######
 
 
@@ -29,10 +29,6 @@ pygame.init()
 # vt = Ventana inicial
 vt = pygame.display.set_mode((pant_anc, pant_alt)) # Se le pasa una variable como parametro para definir tamaño de vt
 pygame.display.set_caption("Botecitos 'El juego'") # Se le da una nombre a la ventana
-
-
-# fdpi = fondo de pantalla inicial en vt
-fdpi = pygame.image.load("./recursos/imagenes/fondo_pantalla_inicial.png").convert_alpha()
 
 #####
 # FUNCIONES
@@ -44,9 +40,10 @@ def tomar_fuente(fuente_T): # fuente_T = Tamaño de la fuente
 
 def main_menu():
     while True:
-        vt.blit(fdpi, (0, 0))
-
+        vt = pygame.display.set_mode((800,600))
         cur_pos = pygame.mouse.get_pos()
+        fdpi = pygame.image.load("./recursos/imagenes/sec_rio/rio_1.png")
+        vt.blit(fdpi, (0, 0))
 
         # Texto Botecitos en pantalla inicial
         botecitos_txt = tomar_fuente(75).render("BOTECITOS", True, "#eb606b")
@@ -87,9 +84,8 @@ def main_menu():
 
 def boton_jugar():
     while True: # Se define ciclica la siguiente parte del codigo
-        # cur_pos = posición del cursor
-        cur_pos = pygame.mouse.get_pos() # obtener la posición del cursor del mouse
-
+        vt = pygame.display.set_mode((pant_anc, pant_alt))
+        cur_pos = pygame.mouse.get_pos()
         fdpmdj = pygame.image.load("./recursos/imagenes/fondo_modo_juego.png")
         vt.blit(fdpmdj, (0, 0))
 
@@ -127,7 +123,7 @@ def boton_jugar():
 
 def caratula():
     while True:
-        cur_pos = pygame.mouse.get_pos() # obtener la posición del cursor del mouse
+        cur_pos = pygame.mouse.get_pos()
         fdpmdj = pygame.image.load("./recursos/imagenes/caratula.png")
         vt.blit(fdpmdj, (0, 0))
 
@@ -155,8 +151,8 @@ def caratula():
 
 def boton_jugar_pve():
     while True: # Se define ciclica la siguiente parte del codigo
-        # cur_pos = posición del cursor
-        cur_pos = pygame.mouse.get_pos() # obtener la posición del cursor del mouse
+        cur_pos = pygame.mouse.get_pos()
+        fdpi = pygame.image.load("./recursos/imagenes/fondo_pantalla_inicial.png")
         vt.blit(fdpi, (0, 0))
         
         jtxt_retornar = Boton(image=None, pos=(140, 620), 
@@ -183,8 +179,7 @@ def boton_jugar_pve():
 
 def boton_jugar_pvp():
     while True: # Se define ciclica la siguiente parte del codigo
-        # cur_pos = posición del cursor
-        cur_pos = pygame.mouse.get_pos() # obtener la posición del cursor del mouse
+        cur_pos = pygame.mouse.get_pos()
         fdpmdj = pygame.image.load("./recursos/imagenes/fondo_pantalla_inicial.png")
         vt.blit(fdpmdj, (0, 0))
         
@@ -209,9 +204,8 @@ def boton_jugar_pvp():
 def ventana_pruebas():
     while True:
         vt.fill("orange")
-        cur_pos = pygame.mouse.get_pos()
-
         # Texto Pruebas
+        cur_pos = pygame.mouse.get_pos()
         botecitos_txt = tomar_fuente(75).render("Pruebas", True, "#eb606b")
         botecitos_xy = botecitos_txt.get_rect(center=(640, 100))
         vt.blit(botecitos_txt, botecitos_xy)
