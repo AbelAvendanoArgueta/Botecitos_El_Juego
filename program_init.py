@@ -1,33 +1,19 @@
 # Abel Fernando Avendaño Argueta
 
 import pygame, sys
-from boton import Boton
+from boton import *
 from pygame.locals import *
 from parametros_generales import *
-
-#####
-# VARIABLES
-#####
-
-    ###### 
-    # CONSTANTES
-    ######
-
-
-
-    ###### 
-    # NO CONSTANTES
-    ######
-
+from random import *
+from time import *
 
 pygame.init()
 # vt = Ventana inicial
 vt = pygame.display.set_mode((medidas['ventana_ancho'], medidas['ventana_alto'])) # Se le pasa una variable como parametro para definir tamaño de vt
 pygame.display.set_caption("Botecitos 'El juego'") # Se le da una nombre a la ventana
+reloj = pygame.time.Clock()
 
-#####
 # FUNCIONES
-#####
 
 # Importacion de Fuente
 def tomar_fuente(fuente_T): # fuente_T = Tamaño de la fuente 
@@ -107,6 +93,7 @@ def boton_jugar():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if btn_jugar_pve.checkForInput(cur_pos):
                     boton_jugar_pve()
+                    iniciar_juego()
                 if btn_jugar_pvp.checkForInput(cur_pos):
                     boton_jugar_pvp()
      
@@ -142,32 +129,9 @@ def caratula():
         pygame.display.update()
 
 def boton_jugar_pve():
-    while True: # Se define ciclica la siguiente parte del codigo
-        cur_pos = pygame.mouse.get_pos()
-        fdpi = pygame.image.load("./recursos/imagenes/fondo_pantalla_inicial.png")
-        vt.blit(fdpi, (0, 0))
-        
-        jtxt_retornar = Boton(image=None, pos=(140, 620), 
-                            text_input="retornar", font=tomar_fuente(30), base_color=blanco, hovering_color=rojo)
-        
-        comenzar_jugar = Boton(image=None, pos=(1050, 620), 
-                            text_input="Comenzar Juego", font=tomar_fuente(30), base_color=blanco, hovering_color="Green")
-
-        for button in [jtxt_retornar, comenzar_jugar]:
-            button.changeColor(cur_pos)
-            button.update(vt)
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if jtxt_retornar.checkForInput(cur_pos):
-                    boton_jugar()
-                if comenzar_jugar.checkForInput(cur_pos):
-                    ventana_pruebas()
-
-        pygame.display.update()
+    vt = pygame.display.set_mode((medidas['ventana_ancho'], medidas['ventana_alto']))
+    fdpi = pygame.image.load("./recursos/imagenes/fondo_mar.png")
+    vt.blit(fdpi, (0, 0))
 
 def boton_jugar_pvp():
     while True: # Se define ciclica la siguiente parte del codigo
@@ -223,5 +187,11 @@ def ventana_pruebas():
         
         pygame.display.update()
 
-if __name__ == "__main__":
+######
+# Logica del videojogo
+######
+
+if __name__ == "__main__": 
+    # Cuando ejecutamos el programa
+    # esta es la primera funcion que se llama
     main_menu()
