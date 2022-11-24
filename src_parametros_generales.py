@@ -1,19 +1,4 @@
-tipos_barcos = [1]
-lado = 2
-
-letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
-# colores
-blanco = (255,255,255)
-negro = (0,0,0)
-gris = ("#3d4c4f")
-rojo = (255,0,0)
-verde = (0, 255, 0)
-azul = (0, 0, 255)
-azul_per = ("#3daee9")
-amarillo_per = ("#f7eb95")
-naranja = ("orange")
-
+# Configuracion de pantalla y tableros
 medidas = {
     'lado_cuadrado': 30,
     'separacion': 100,
@@ -24,10 +9,36 @@ medidas = {
     'ventana_alto': 650,
 }
 
+# colores
+blanco = (255,255,255)
+negro = (0,0,0)
+gris = ("#3d4c4f")
+rojo = (255,0,0)
+verde = (0, 255, 0)
+azul = (0, 0, 255)
+azul_per = ("#3daee9")
+amarillo_per = ("#f7eb95")
+naranja = ("Orange")
+
+
+# tipeo de texto
 velocidad_texto = 100
 
-# Alertas
+# Parametros de juego
+letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+longitud_barcos = [1]
+lado = 2
 
+# Acceso a recursos de forma dinamica
+import_fuente = "./recursos/tipografia/fuente.ttf"
+imagen_menu_inicial = "./recursos/imagenes/fondo_rio.png"
+imagen_botecitos_titulos = "./recursos/imagenes/titulo_pant_inicial.png"
+imagen_boton = "./recursos/imagenes/boton_vt.png"
+imagen_modo_juego = "./recursos/imagenes/fondo_modo_juego.png"
+imagen_caratula = "./recursos/imagenes/caratula.png"
+imagen_mar = "./recursos/imagenes/fondo_mar.png"
+
+# Alertas
 texto_longitud_barco='un barco de longitud'
 texto_configurar='Pulsa F10 para configurar idioma y resolución de pantalla'
 texto_continuar = '\nPulsa ENTER para continuar'
