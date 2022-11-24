@@ -23,7 +23,7 @@ def main_menu():
     while True:
         vt = pygame.display.set_mode((800,600))
         cur_pos = pygame.mouse.get_pos()    
-        fdpi = pygame.image.load("./recursos/imagenes/sec_rio/rio_1.png")
+        fdpi = pygame.image.load("./recursos/imagenes/fondo_rio.png")
         vt.blit(fdpi, (0, 0))
 
         # Texto Botecitos en pantalla inicial
