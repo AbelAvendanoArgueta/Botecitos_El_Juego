@@ -3,6 +3,7 @@
 import pygame, sys
 from boton import Boton
 from pygame.locals import *
+from parametros_generales import *
 
 #####
 # VARIABLES
@@ -12,8 +13,7 @@ from pygame.locals import *
     # CONSTANTES
     ######
 
-pant_alt = 650 # pant_alt = pantalla_altura
-pant_anc = 1280 # pant_anc = pantalla_ancho
+
 
     ###### 
     # NO CONSTANTES
@@ -22,7 +22,7 @@ pant_anc = 1280 # pant_anc = pantalla_ancho
 
 pygame.init()
 # vt = Ventana inicial
-vt = pygame.display.set_mode((pant_anc, pant_alt)) # Se le pasa una variable como parametro para definir tamaño de vt
+vt = pygame.display.set_mode((medidas['ventana_ancho'], medidas['ventana_alto'])) # Se le pasa una variable como parametro para definir tamaño de vt
 pygame.display.set_caption("Botecitos 'El juego'") # Se le da una nombre a la ventana
 
 #####
@@ -42,15 +42,15 @@ def main_menu():
 
         # Texto Botecitos en pantalla inicial
         titulo_juego = Boton(image=pygame.image.load("./recursos/imagenes/titulo_pant_inicial.png"), pos=(400, 150), 
-                            text_input="", font=tomar_fuente(70), base_color="White", hovering_color="#f7eb95")
+                            text_input="", font=tomar_fuente(10), base_color=blanco, hovering_color=blanco)
         
 
         btn_jugar = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(400, 350), 
-                            text_input="Jugar", font=tomar_fuente(70), base_color="White", hovering_color="#f7eb95")
+                            text_input="Jugar", font=tomar_fuente(70), base_color=blanco, hovering_color=amarillo_per)
         btn_salir = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(400, 475), 
-                            text_input="Salir", font=tomar_fuente(70), base_color="White", hovering_color="#f7eb95")
+                            text_input="Salir", font=tomar_fuente(70), base_color=blanco, hovering_color=amarillo_per)
         btn_coders = Boton(image=None, pos=(770, 570), 
-                            text_input="❯", font=tomar_fuente(30), base_color="#3daee9", hovering_color="Green")
+                            text_input="❯", font=tomar_fuente(30), base_color=azul_per, hovering_color="Green")
              
 
         for button in [btn_jugar, btn_salir, btn_coders,titulo_juego]:
@@ -75,7 +75,7 @@ def main_menu():
 
 def boton_jugar():
     while True: # Se define ciclica la siguiente parte del codigo
-        vt = pygame.display.set_mode((pant_anc, pant_alt))
+        vt = pygame.display.set_mode((medidas['ventana_ancho'], medidas['ventana_alto']))
         cur_pos = pygame.mouse.get_pos()
         fdpmdj = pygame.image.load("./recursos/imagenes/fondo_modo_juego.png")
         vt.blit(fdpmdj, (0, 0))
@@ -83,12 +83,12 @@ def boton_jugar():
         ## Texto Jugar
         # jugar_txt = da formato a nuestro texto
         btn_jugar_pve = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(290, 435), 
-                            text_input="PVE", font=tomar_fuente(70), base_color="White", hovering_color="Green")
+                            text_input="PVE", font=tomar_fuente(70), base_color=blanco, hovering_color="Green")
         btn_jugar_pvp = Boton(image=pygame.image.load("./recursos/imagenes/boton_vt.png"), pos=(965, 215), 
-                            text_input="PVP", font=tomar_fuente(70), base_color="White", hovering_color="Green")
+                            text_input="PVP", font=tomar_fuente(70), base_color=blanco, hovering_color="Green")
         
         jtxt_retornar = Boton(image=None, pos=(640, 565), 
-                            text_input="retornar", font=tomar_fuente(65), base_color="White", hovering_color="Red")
+                            text_input="retornar", font=tomar_fuente(65), base_color=blanco, hovering_color=rojo)
 
         for button in [btn_jugar_pve, btn_jugar_pvp]:
             button.changeColor(cur_pos)
@@ -114,7 +114,7 @@ def boton_jugar():
 
 def caratula():
     while True:
-        vt = pygame.display.set_mode((pant_anc, pant_alt))
+        vt = pygame.display.set_mode((medidas['ventana_ancho'], medidas['ventana_alto']))
         cur_pos = pygame.mouse.get_pos()
         fdpmdj = pygame.image.load("./recursos/imagenes/caratula.png")
         vt.blit(fdpmdj, (0, 0))
@@ -148,10 +148,10 @@ def boton_jugar_pve():
         vt.blit(fdpi, (0, 0))
         
         jtxt_retornar = Boton(image=None, pos=(140, 620), 
-                            text_input="retornar", font=tomar_fuente(30), base_color="White", hovering_color="Red")
+                            text_input="retornar", font=tomar_fuente(30), base_color=blanco, hovering_color=rojo)
         
         comenzar_jugar = Boton(image=None, pos=(1050, 620), 
-                            text_input="Comenzar Juego", font=tomar_fuente(30), base_color="White", hovering_color="Green")
+                            text_input="Comenzar Juego", font=tomar_fuente(30), base_color=blanco, hovering_color="Green")
 
         for button in [jtxt_retornar, comenzar_jugar]:
             button.changeColor(cur_pos)
@@ -176,11 +176,8 @@ def boton_jugar_pvp():
         vt.blit(fdpmdj, (0, 0))
         
         jtxt_retornar = Boton(image=None, pos=(640, 565), 
-                            text_input="retornar", font=tomar_fuente(65), base_color="White", hovering_color="Red")
+                            text_input="retornar", font=tomar_fuente(65), base_color=blanco, hovering_color=rojo)
 
-        #for button in [btn_jugar_pve, btn_jugar_pvp]:
-        #    button.changeColor(cur_pos)
-        #   button.update(vt)
 
         jtxt_retornar.changeColor(cur_pos)
         jtxt_retornar.update(vt)
@@ -195,7 +192,7 @@ def boton_jugar_pvp():
 
 def ventana_pruebas():
     while True:
-        vt.fill("orange")
+        vt.fill(naranja)
         # Texto Pruebas
         cur_pos = pygame.mouse.get_pos()
         botecitos_txt = tomar_fuente(75).render("Pruebas", True, "#eb606b")
@@ -203,9 +200,10 @@ def ventana_pruebas():
         vt.blit(botecitos_txt, botecitos_xy)
 
         jtxt_retornar = Boton(image=None, pos=(140, 620), 
-                        text_input="retornar", font=tomar_fuente(30), base_color="White", hovering_color="Red")
+                        text_input="retornar", font=tomar_fuente(30), base_color=blanco, hovering_color=rojo)
         
         #
+        
         #
 
         for button in [jtxt_retornar]:
