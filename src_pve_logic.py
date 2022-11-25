@@ -74,3 +74,10 @@ def dib_tablero_de_juego(Coordenadas_en_X0,Coordenadas_en_Y0,tablero_de_juego):
             else:
                 letra = tomar_fuente(20).render(casilla, True, negro)
                 vt.blit(letra, (Coordenadas_en_X0 + medidas['lado_cuadrado']*fila, Coordenadas_en_Y0 +medidas['lado_cuadrado']*columna))
+
+def oculta_posde_barcos(tablero_de_juego):
+    tablero_procesado = [] 
+    for fila in tablero_de_juego:
+        nueva_fila = [(' ' if casilla=='B' else casilla) for casilla in fila]
+        tablero_procesado.append(nueva_fila)
+    return tablero_procesado # Retorna un nuevo tablero con las pocisiones correctas
