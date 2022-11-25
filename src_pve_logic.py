@@ -125,3 +125,22 @@ def traducir_coordenadas_al_reves(x,y):
     letra = chr(ord('A') + y)
     ejecucion_Ddisparo = letra + numero
     return ejecucion_Ddisparo
+
+def verificar_posicionTab(x,y):
+    # Se verifica en que posicion del tablero esta ubicado
+    vecinos = []
+    if x>0:
+        vecinos.append((x-1,y))
+    if x<lado-1:
+        vecinos.append((x+1,y))
+    if y>0:
+        vecinos.append((x,y-1))
+    if y<lado-1:
+        vecinos.append((x,y+1))
+    return vecinos
+
+def se_verifica_VecinoX(tablero_de_juego, x, y):
+    # Se verifica si casilla vecina en X puede ser posicion enemiga
+    vecinos = verificar_posicionTab(x,y)
+    return any(tablero_de_juego[x_vecino][y_vecino]=='X'
+               for (x_vecino, y_vecino) in vecinos)
