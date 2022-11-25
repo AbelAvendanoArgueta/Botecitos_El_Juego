@@ -144,3 +144,122 @@ def se_verifica_VecinoX(tablero_de_juego, x, y):
     vecinos = verificar_posicionTab(x,y)
     return any(tablero_de_juego[x_vecino][y_vecino]=='X'
                for (x_vecino, y_vecino) in vecinos)
+
+def ataque_pc_nivel_2(tablero_de_juego):
+    # En base a la verificacion de casillas vecinas se trata de dar
+    # un ejecucion_Ddisparo certero
+    casillas_prioritarias = [
+        (x,y) for x in range(lado)
+              for y in range(lado)
+        if (tablero_de_juego[x][y]==' ') and se_verifica_VecinoX(tablero_de_juego, x,y)
+        ]
+    if len(casillas_prioritarias) > 0:
+        x,y = choice(casillas_prioritarias)
+    else:
+        x,y = ataque_pc_nivel_1(tablero_de_juego)
+    return x,y
+
+def ejecucion_Ddisparo(tablero_de_juego, x, y):
+    elemento_antiguo = tablero_de_juego[x][y]
+    if elemento_antiguo in ' .':
+        elemento_nuevo = 'O'
+    elif elemento_antiguo=='B':
+        elemento_nuevo = 'X'
+        if x>0 and y>0 and tablero_de_juego[x-1][y-1] == ' ':
+            tablero_de_juego[x-1][y-1] = '.'
+        if x>0 and y<lado-1 and tablero_de_juego[x-1][y+1] == ' ':
+            tablero_de_juego[x-1][y+1] = '.'
+        if x<lado-1 and y>0 and tablero_de_juego[x+1][y-1] == ' ':
+            tablero_de_juego[x+1][y-1] = '.'
+        if x<lado-1 and y<lado-1 and tablero_de_juego[x+1][y+1] == ' ':
+            tablero_de_juego[x+1][y+1] = '.'
+    else:
+        elemento_nuevo = elemento_antiguo
+    tablero_de_juego[x][y] = elemento_nuevo
+    return tablero_de_juego
+
+
+def verificar_disparo_Prevrealizado(tablero_de_juego, x, y):
+    # Se verifica si la casilla en la que se intenta disparar
+    # es una casilla en la que se disparo previamente
+    # luego se actualiza tablero
+    tablero_procesado = []
+    for numero_fila in range(lado):
+        if numero_fila != y:
+            fila_antigua = tablero_de_juego[numero_fila]
+            tablero_procesado.append(fila_antigua)
+        else:
+            fila_antigua = tablero_de_juego[numero_fila]
+            fila_nueva = []
+            for numero_columna in range(lado):
+                if numero_columna != x:
+                    elemento_antiguo = fila_antigua[numero_columna]
+                    fila_nueva.append(elemento_antiguo)
+                else:
+                    elemento_antiguo = fila_antigua[numero_columna]
+                    if elemento_antiguo==' ':
+                        elemento_nuevo = 'O'
+                    elif elemento_antiguo=='B':
+                        elemento_nuevo = 'X'
+                    else:
+                        elemento_nuevo = elemento_antiguo
+                    fila_nueva.append(elemento_nuevo)
+            tablero_procesado.append(fila_nueva)
+            # se procesa tablero nuevo con casillas en filas y
+            # columnas en las que ya hubo disparos
+    if elemento_nuevo=='X':
+        # marcamos con diagonales con punto
+        pass
+    return tablero_procesado
+
+def comprueba_unidad_destruida(tablero_de_juego, posiciones_barcos, x, y):
+    if tablero_de_juego[x][y] != 'B':
+        return False
+    if not se_verifica_VecinoX(tablero_de_juego, x, y):
+        return False
+    for j, posiciones_barco in posiciones_barcos.items():
+        if any( (xbarco==x ) and (ybarco==y)
+                for xbarco, ybarco in posiciones_barco ):
+            #estoy disparando al barco j
+            daño = sum(1 for xbarco, ybarco in posiciones_barco
+                       if tablero_de_juego[xbarco][ybarco]=='X')
+            largo = len(posiciones_barco)
+            if daño == largo-1:
+#                import pudb; pudb.set_trace()
+                x_primer, y_primer = posiciones_barco[0]
+                x_ultima, y_ultima = posiciones_barco[-1]
+                if x_primer == x_ultima:
+                    # vertical
+                    # primera_casilla
+                    x = x_primer
+                    y = y_primer - 1
+                    if y>=0 and tablero_de_juego[x][y] == ' ':
+                        tablero_de_juego[x][y] = '.'
+                    # ultima_casilla
+                    x = x_primer
+                    y = y_ultima + 1
+                    if y<lado and tablero_de_juego[x][y] == ' ':
+                        tablero_de_juego[x][y] = '.'
+                else:
+                    # horizontal
+                    # primera_casilla
+                    x = x_primer - 1
+                    y = y_primer
+                    if x>=0 and tablero_de_juego[x][y] == ' ':
+                        tablero_de_juego[x][y] = '.'
+                    # ultima_casilla
+                    x = x_ultima + 1
+                    y = y_ultima
+                    if x<lado and tablero_de_juego[x][y] == ' ':
+                        tablero_de_juego[x][y] = '.'
+                alerta(texto_alerta_hundido)
+                return True
+    
+def alerta(texto):
+    # Funcion para lanzar alertas segun parametro
+    # pasado a travez de variable 'texto'
+    # normamente los texto que imprimiran las alertas
+    # estan ubicadas  en archivo de parametros generales
+    global texto_alerta, tiempo_ultima_alerta
+    tiempo_ultima_alerta = pygame.time.get_ticks()
+    texto_alerta = texto
