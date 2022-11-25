@@ -49,3 +49,28 @@ def d_cuadricula_dTabs(Coordenadas_en_X0, Coordenadas_en_Y0):
     for j in range(0,lado):
         letra = tomar_fuente(20).render(str(j+1), True, negro)
         vt.blit(letra, (Coordenadas_en_X0 + medidas['lado_cuadrado']*j + (medidas['lado_cuadrado'] - medidas['tamaño_letra']), Coordenadas_en_Y0 +medidas['lado_cuadrado']*lado))
+
+def dib_tablero_de_juego(Coordenadas_en_X0,Coordenadas_en_Y0,tablero_de_juego):
+    # Se dibuja tablero de juego
+
+    d_cuadricula_dTabs(Coordenadas_en_X0,Coordenadas_en_Y0)
+    # se toman las coordenadas de la cuadricula de los tableros
+    for fila in range(lado):
+        for columna in range(lado):
+            casilla = tablero_de_juego[fila][columna]
+            if casilla in 'BOX':
+                if casilla=='B':
+                    color = gris
+                elif casilla=='O':
+                    color = azul
+                elif casilla=='X':
+                    color = rojo
+                pygame.draw.circle(vt, color,
+                             (Coordenadas_en_X0+medidas['lado_cuadrado']*fila+medidas['lado_cuadrado']//2, Coordenadas_en_Y0 + medidas['lado_cuadrado']*columna+medidas['lado_cuadrado']//2),
+                             medidas['lado_cuadrado']//2
+                    )
+            elif (casilla == ' ') or (casilla == '.'):
+                pass
+            else:
+                letra = tomar_fuente(20).render(casilla, True, negro)
+                vt.blit(letra, (Coordenadas_en_X0 + medidas['lado_cuadrado']*fila, Coordenadas_en_Y0 +medidas['lado_cuadrado']*columna))
