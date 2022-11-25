@@ -104,3 +104,24 @@ def tablero_vacio():
 def tablero_duda():
     # Refrescamiento exclusivamente para segundo tablero
     return [[' ']*lado for _ in range(lado)]
+
+### Inteligencia enemiga
+
+def ataque_pc_nivel_1(tablero_de_juego): 
+    # ataque mas basico del pc
+    # literalmente tu harias esto, probar al azar
+    x = randint(0,lado-1)
+    y = randint(0,lado-1)
+    #Puede ser desconocido, o barco, porque el tablero_de_juego llega ofuscado
+    if tablero_de_juego[x][y]==' ':
+        print('El ordenador dispara:', traducir_coordenadas_al_reves(x, y))
+    else:
+        print('aquí ya he disparado, mejor vuelvo a lanzar los dados')
+        x,y = ataque_pc_nivel_1(tablero_de_juego)
+    return x,y
+
+def traducir_coordenadas_al_reves(x,y):
+    numero = str(x + 1)
+    letra = chr(ord('A') + y)
+    ejecucion_Ddisparo = letra + numero
+    return ejecucion_Ddisparo
