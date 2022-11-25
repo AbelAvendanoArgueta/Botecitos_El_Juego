@@ -81,3 +81,26 @@ def oculta_posde_barcos(tablero_de_juego):
         nueva_fila = [(' ' if casilla=='B' else casilla) for casilla in fila]
         tablero_procesado.append(nueva_fila)
     return tablero_procesado # Retorna un nuevo tablero con las pocisiones correctas
+
+def dibuja_tableros(primer_tablero, segundo_tablero):
+    # Primer Tablero
+    Coordenadas_en_X0 = medidas['margen']
+    Coordenadas_en_Y0 = medidas['margen']
+    dib_tablero_de_juego(Coordenadas_en_X0,Coordenadas_en_Y0,primer_tablero)
+    Coordenadas_en_X0 = medidas['margen'] + medidas['separacion'] + medidas['lado_cuadrado']*lado
+    Coordenadas_en_Y0 = medidas['margen']
+
+    # Segundo Tablero
+    segundo_tablero_OcuPos = oculta_posde_barcos(segundo_tablero)
+    dib_tablero_de_juego(Coordenadas_en_X0,Coordenadas_en_Y0,segundo_tablero_OcuPos)
+    pygame.display.update() # necesario para refrescar con tablero sub-procesado
+    # Se procesa tablero de oponente para ocultar pocisiones de barcos, y devolver
+    # un tablero donde lo unico que se ve es la cuadricula
+
+def tablero_vacio():
+    # Refrescamiento de tableros
+    return [[' ']*lado for _ in range(lado)]
+
+def tablero_duda():
+    # Refrescamiento exclusivamente para segundo tablero
+    return [[' ']*lado for _ in range(lado)]
