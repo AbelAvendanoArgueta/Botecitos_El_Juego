@@ -21,13 +21,19 @@ amarillo_per = ("#f7eb95")
 naranja = ("Orange")
 
 
-# tipeo de texto
+# Tipeo de texto
 velocidad_texto = 100
 
 # Parametros de juego
 letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 longitud_barcos = [1]
-lado = 2
+    # Esta variable nos permite facilmente cambiar
+    # la forma en la que trabaja la funcion
+    # opc_disp_barcos_dejugador()
+cuadros_perLado = 2
+    # cuadros por lado define el tamaño
+    # del tablero por medio de la cuadricula
+    # por lado 
 
 # Acceso a recursos de forma dinamica
 import_fuente = "./recursos/tipografia/fuente.ttf"

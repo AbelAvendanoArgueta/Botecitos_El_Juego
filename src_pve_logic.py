@@ -13,9 +13,9 @@ def tomar_fuente(fuente_T): # fuente_T = Tamaño de la fuente
 
 ### Dibujo, trazado y analisis de tableros
 def atravezar_tablero(tablero_de_juego):
-    cruzando_tablero = [[' ']*lado for _ in range(lado)]
-    for i in range(lado):
-        for j in range(lado):
+    cruzando_tablero = [[' ']*cuadros_perLado for _ in range(cuadros_perLado)]
+    for i in range(cuadros_perLado):
+        for j in range(cuadros_perLado):
             cruzando_tablero[i][j] = tablero_de_juego[j][i]
     return cruzando_tablero
 
@@ -28,35 +28,35 @@ def d_cuadricula_dTabs(Coordenadas_en_X0, Coordenadas_en_Y0):
     # Dibujo de Cuadricula de los tableros
     pygame.draw.rect(vt, blanco,
                      (Coordenadas_en_X0, Coordenadas_en_Y0,
-                      lado*medidas['lado_cuadrado'], lado*medidas['lado_cuadrado']))
+                      cuadros_perLado*medidas['lado_cuadrado'], cuadros_perLado*medidas['lado_cuadrado']))
     # Lineas horizontales
-    for j in range(0,lado+1):
+    for j in range(0,cuadros_perLado+1):
         pygame.draw.line(vt, negro,
                          (Coordenadas_en_X0, Coordenadas_en_Y0 + medidas['lado_cuadrado']*j),
-                         (Coordenadas_en_X0 + medidas['lado_cuadrado']*lado, Coordenadas_en_Y0 +medidas['lado_cuadrado']*j), 1)
+                         (Coordenadas_en_X0 + medidas['lado_cuadrado']*cuadros_perLado, Coordenadas_en_Y0 +medidas['lado_cuadrado']*j), 1)
     # Letras en las filas
-    for j in range(0,lado):
+    for j in range(0,cuadros_perLado):
         letra = tomar_fuente(20).render(letras[j], True, negro)
         vt.blit(letra, (Coordenadas_en_X0-medidas['lado_cuadrado'], Coordenadas_en_Y0 + medidas['lado_cuadrado']*j))
 
     # Lineas verticales
-    for j in range(0,lado+1):
+    for j in range(0,cuadros_perLado+1):
         pygame.draw.line(vt, negro,
                          (Coordenadas_en_X0 + medidas['lado_cuadrado']*j, Coordenadas_en_Y0),
-                         (Coordenadas_en_X0 + medidas['lado_cuadrado']*j, Coordenadas_en_Y0 +medidas['lado_cuadrado']*lado), 1)
+                         (Coordenadas_en_X0 + medidas['lado_cuadrado']*j, Coordenadas_en_Y0 +medidas['lado_cuadrado']*cuadros_perLado), 1)
 
     # Numeros en las columnas
-    for j in range(0,lado):
+    for j in range(0,cuadros_perLado):
         letra = tomar_fuente(20).render(str(j+1), True, negro)
-        vt.blit(letra, (Coordenadas_en_X0 + medidas['lado_cuadrado']*j + (medidas['lado_cuadrado'] - medidas['tamaño_letra']), Coordenadas_en_Y0 +medidas['lado_cuadrado']*lado))
+        vt.blit(letra, (Coordenadas_en_X0 + medidas['lado_cuadrado']*j + (medidas['lado_cuadrado'] - medidas['tamaño_letra']), Coordenadas_en_Y0 +medidas['lado_cuadrado']*cuadros_perLado))
 
 def dib_tablero_de_juego(Coordenadas_en_X0,Coordenadas_en_Y0,tablero_de_juego):
     # Se dibuja tablero de juego
 
     d_cuadricula_dTabs(Coordenadas_en_X0,Coordenadas_en_Y0)
     # se toman las coordenadas de la cuadricula de los tableros
-    for fila in range(lado):
-        for columna in range(lado):
+    for fila in range(cuadros_perLado):
+        for columna in range(cuadros_perLado):
             casilla = tablero_de_juego[fila][columna]
             if casilla in 'BOX':
                 if casilla=='B':
@@ -87,7 +87,7 @@ def dibuja_tableros(primer_tablero, segundo_tablero):
     Coordenadas_en_X0 = medidas['margen']
     Coordenadas_en_Y0 = medidas['margen']
     dib_tablero_de_juego(Coordenadas_en_X0,Coordenadas_en_Y0,primer_tablero)
-    Coordenadas_en_X0 = medidas['margen'] + medidas['separacion'] + medidas['lado_cuadrado']*lado
+    Coordenadas_en_X0 = medidas['margen'] + medidas['separacion'] + medidas['lado_cuadrado']*cuadros_perLado
     Coordenadas_en_Y0 = medidas['margen']
 
     # Segundo Tablero
@@ -99,19 +99,19 @@ def dibuja_tableros(primer_tablero, segundo_tablero):
 
 def tablero_vacio():
     # Refrescamiento de tableros
-    return [[' ']*lado for _ in range(lado)]
+    return [[' ']*cuadros_perLado for _ in range(cuadros_perLado)]
 
 def tablero_duda():
     # Refrescamiento exclusivamente para segundo tablero
-    return [[' ']*lado for _ in range(lado)]
+    return [[' ']*cuadros_perLado for _ in range(cuadros_perLado)]
 
 ### Inteligencia enemiga
 
 def ataque_pc_nivel_1(tablero_de_juego): 
     # ataque mas basico del pc
     # literalmente tu harias esto, probar al azar
-    x = randint(0,lado-1)
-    y = randint(0,lado-1)
+    x = randint(0,cuadros_perLado-1)
+    y = randint(0,cuadros_perLado-1)
     #Puede ser desconocido, o barco, porque el tablero_de_juego llega ofuscado
     if tablero_de_juego[x][y]==' ':
         print('El ordenador dispara:', traducir_coordenadas_al_reves(x, y))
@@ -126,16 +126,24 @@ def traducir_coordenadas_al_reves(x,y):
     ejecucion_Ddisparo = letra + numero
     return ejecucion_Ddisparo
 
+def traducir_coordenadas(ejecucion_Ddisparo):
+    if len(ejecucion_Ddisparo)<2:
+        return -1, -1
+    letra, numero = ejecucion_Ddisparo[:2]
+    x = ord(numero) - ord('1')
+    y = ord(letra.upper())- ord('A')
+    return x,y
+
 def verificar_posicionTab(x,y):
     # Se verifica en que posicion del tablero esta ubicado
     vecinos = []
     if x>0:
         vecinos.append((x-1,y))
-    if x<lado-1:
+    if x<cuadros_perLado-1:
         vecinos.append((x+1,y))
     if y>0:
         vecinos.append((x,y-1))
-    if y<lado-1:
+    if y<cuadros_perLado-1:
         vecinos.append((x,y+1))
     return vecinos
 
@@ -149,8 +157,8 @@ def ataque_pc_nivel_2(tablero_de_juego):
     # En base a la verificacion de casillas vecinas se trata de dar
     # un ejecucion_Ddisparo certero
     casillas_prioritarias = [
-        (x,y) for x in range(lado)
-              for y in range(lado)
+        (x,y) for x in range(cuadros_perLado)
+              for y in range(cuadros_perLado)
         if (tablero_de_juego[x][y]==' ') and se_verifica_VecinoX(tablero_de_juego, x,y)
         ]
     if len(casillas_prioritarias) > 0:
@@ -167,11 +175,11 @@ def ejecucion_Ddisparo(tablero_de_juego, x, y):
         elemento_nuevo = 'X'
         if x>0 and y>0 and tablero_de_juego[x-1][y-1] == ' ':
             tablero_de_juego[x-1][y-1] = '.'
-        if x>0 and y<lado-1 and tablero_de_juego[x-1][y+1] == ' ':
+        if x>0 and y<cuadros_perLado-1 and tablero_de_juego[x-1][y+1] == ' ':
             tablero_de_juego[x-1][y+1] = '.'
-        if x<lado-1 and y>0 and tablero_de_juego[x+1][y-1] == ' ':
+        if x<cuadros_perLado-1 and y>0 and tablero_de_juego[x+1][y-1] == ' ':
             tablero_de_juego[x+1][y-1] = '.'
-        if x<lado-1 and y<lado-1 and tablero_de_juego[x+1][y+1] == ' ':
+        if x<cuadros_perLado-1 and y<cuadros_perLado-1 and tablero_de_juego[x+1][y+1] == ' ':
             tablero_de_juego[x+1][y+1] = '.'
     else:
         elemento_nuevo = elemento_antiguo
@@ -184,14 +192,14 @@ def verificar_disparo_Prevrealizado(tablero_de_juego, x, y):
     # es una casilla en la que se disparo previamente
     # luego se actualiza tablero
     tablero_procesado = []
-    for numero_fila in range(lado):
+    for numero_fila in range(cuadros_perLado):
         if numero_fila != y:
             fila_antigua = tablero_de_juego[numero_fila]
             tablero_procesado.append(fila_antigua)
         else:
             fila_antigua = tablero_de_juego[numero_fila]
             fila_nueva = []
-            for numero_columna in range(lado):
+            for numero_columna in range(cuadros_perLado):
                 if numero_columna != x:
                     elemento_antiguo = fila_antigua[numero_columna]
                     fila_nueva.append(elemento_antiguo)
@@ -238,7 +246,7 @@ def comprueba_unidad_destruida(tablero_de_juego, posiciones_barcos, x, y):
                     # ultima_casilla
                     x = x_primer
                     y = y_ultima + 1
-                    if y<lado and tablero_de_juego[x][y] == ' ':
+                    if y<cuadros_perLado and tablero_de_juego[x][y] == ' ':
                         tablero_de_juego[x][y] = '.'
                 else:
                     # horizontal
@@ -250,10 +258,53 @@ def comprueba_unidad_destruida(tablero_de_juego, posiciones_barcos, x, y):
                     # ultima_casilla
                     x = x_ultima + 1
                     y = y_ultima
-                    if x<lado and tablero_de_juego[x][y] == ' ':
+                    if x<cuadros_perLado and tablero_de_juego[x][y] == ' ':
                         tablero_de_juego[x][y] = '.'
                 alerta(texto_alerta_hundido)
                 return True
+
+### Trazado de barcos
+### Jugador coloca sus barcos
+
+def dibuja_barcos_Dur_Col(largo, x, y, vertical, color=gris):
+    # Dibuja los barcos durante la colocacion en los tableros
+    if vertical:
+        pygame.draw.polygon(vt, color, [
+            (x, y  + medidas['lado_cuadrado']//2),
+            (x, y + medidas['lado_cuadrado']//2 + medidas['lado_cuadrado']*(largo-1)),
+            (x + medidas['lado_cuadrado']//2, y + medidas['lado_cuadrado']*largo),
+            (x + medidas['lado_cuadrado'], y + medidas['lado_cuadrado']//2 + medidas['lado_cuadrado']*(largo-1)),
+            (x + medidas['lado_cuadrado'], y  + medidas['lado_cuadrado']//2),
+            (x + medidas['lado_cuadrado']//2, y)
+            ])
+    else: # horizontal
+        pygame.draw.polygon(vt, color, [
+            (x + medidas['lado_cuadrado']//2, y),
+            (x + medidas['lado_cuadrado']//2 + medidas['lado_cuadrado']*(largo-1), y),
+            (x + medidas['lado_cuadrado']*largo, y + medidas['lado_cuadrado']//2),
+            (x + medidas['lado_cuadrado']//2 + medidas['lado_cuadrado']*(largo-1), y + medidas['lado_cuadrado']),
+            (x + medidas['lado_cuadrado']//2, y + medidas['lado_cuadrado']),
+            (x, y + medidas['lado_cuadrado']//2)
+            ])
+
+def opc_disp_barcos_dejugador(x, y, barco_seleccionado, barcos_colocados):
+    # Opciones disponible para el jugador
+    # Dibuja opciones a elegir para acomodar en el tablero
+    # Esta funcion facilmente puede ser editada desde
+    # el archivo de parametros_generales longitud_barcos 
+    barco_en_columna = [-1]*(sum(longitud_barcos) + len(longitud_barcos))
+    columna = 0
+    for j,largo in enumerate(longitud_barcos):
+        if j == barco_seleccionado:
+            color = azul
+        elif barcos_colocados[j]:
+            color = verde
+        else:
+            color = gris
+        dibuja_barcos_Dur_Col(largo, x + columna*medidas['lado_cuadrado'], y, False, color)
+        barco_en_columna[columna:columna+largo] = [j]*largo
+        columna = columna + largo + 1
+    return barco_en_columna
     
 def alerta(texto):
     # Funcion para lanzar alertas segun parametro
