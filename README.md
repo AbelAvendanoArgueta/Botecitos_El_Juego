@@ -1,8 +1,8 @@
 #### Botecitos_El_Juego
 <h1 align="center">BOTECITOS: "El Juego"</h1>
-![Título BotecitosTheJogo]("Botecitos El juego")](https://github.com/AbelAvendanoArgueta/Botecitos_El_Juego/blob/main/recursos/imagenes/titulo_pant_inicial.pngttp:// "Título")
+![BOTECITOS el juego](https://github.com/AbelAvendanoArgueta/Botecitos_El_Juego/blob/main/recursos/imagenes/titulo_pant_inicial.png)
    <p align="left">
-   <img src="https://img.shields.io/badge/Sígueme-%40medusin__corales-red"> <img src="https://img.shields.io/badge/Sígueme-%40aosorio.13-blue"> <img src="https://img.shields.io/badge/Sígueme-%40gg__misa__e1-orange">
+   <img src="https://img.shields.io/badge/Sígueme-%40medusin__corales-red">(https://instagram.com/medusin_corales?igshid=YmMyMTA2M2Y=) <img src="https://img.shields.io/badge/Sígueme-%40aosorio.13-blue">(https://instagram.com/aosorio.13?igshid=ZmVmZTY5ZGE=) <img src="https://img.shields.io/badge/Sígueme-%40gg__misa__e1-orange">(https://instagram.com/gg_misa_e1?igshid=ZmVmZTY5ZGE=)
    </p>
 
 ![GitHub Org's stars](https://img.shields.io/github/stars/AbelAvendanoArgueta/Botecitos_El_Juego?style=social)
@@ -11,7 +11,7 @@
 
 *[Insignias](#insignias)
 
-*[Descripción del proyecto](#Descripción del proyecto)
+*[Descripción del proyecto](#Descripcion-del-proyecto)
 
 *[Estado del proyecto](#Estado-del-proyecto)
 
@@ -36,9 +36,11 @@ Anímate a jugar BOTECITOS the game y coloca tus naves muy estratégicamente par
 
 ¡Ni una sola flota estará a salvo en este increible e inmersivo juego de sigilo, suspenso y estrategia!, esto es BOTECITOS: "El Juego".
 
+
 <h4 align="center">
 :construction: Proyecto en construcción :construction:
 </h4>
+
 
 ## :hammer:Formas de juego
 - `PVE`: El método de juego singleplayer PVE o Player versus Enviroment (Jugador contra Entorno), en el que si no cuentas con ningun amigo o vida social alguna, puedes jugar solo contra una máquina programada.
