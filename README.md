@@ -1,8 +1,8 @@
 #### Botecitos_El_Juego
 <h1 align="center">BOTECITOS: "El Juego"</h1>
-![BOTECITOS el juego](https://github.com/AbelAvendanoArgueta/Botecitos_El_Juego/blob/main/recursos/imagenes/titulo_pant_inicial.png)
+![BOTECITOS el juego](./recursos/imagenes/titulo_pant_inicial.png)
    <p align="left">
-   <img src="https://img.shields.io/badge/Sígueme-%40medusin__corales-red">(https://instagram.com/medusin_corales?igshid=YmMyMTA2M2Y=) <img src="https://img.shields.io/badge/Sígueme-%40aosorio.13-blue">(https://instagram.com/aosorio.13?igshid=ZmVmZTY5ZGE=) <img src="https://img.shields.io/badge/Sígueme-%40gg__misa__e1-orange">(https://instagram.com/gg_misa_e1?igshid=ZmVmZTY5ZGE=)
+   <img src="https://img.shields.io/badge/Sígueme-%40medusin__corales-red"> <img src="https://img.shields.io/badge/Sígueme-%40aosorio.13-blue"> <img src="https://img.shields.io/badge/Sígueme-%40gg__misa__e1-orange">
    </p>
 
 ![GitHub Org's stars](https://img.shields.io/github/stars/AbelAvendanoArgueta/Botecitos_El_Juego?style=social)
@@ -60,5 +60,5 @@ Ejecuar init.sh (si no tienes acceso a una terminal Bash, ejecuta program_init.p
 
 ## Autores
 
-| [<img src="https://avatars.githubusercontent.com/u/53498059?v=4" width=115><br><sub>-Abel Avendaño-</sub>](https://github.com/AbelAvendanoArgueta) |  [<img src="https://avatars.githubusercontent.com/u/118378677?v=4" width=115><br><sub>-RidiConHuracanes-</sub>]([https://github.com/RidiConHuracanes](https://github.com/ellenpimentel)) | [<img src="https://avatars.githubusercontent.com/u/117698707?v=4" width=115><br><sub>-Misa González-</sub>](https://github.com/ElMisaaa) |  
+| [<img src="https://avatars.githubusercontent.com/u/53498059?v=4" width=115><br><sub>-Abel Avendaño-</sub>](https://github.com/AbelAvendanoArgueta) |  [<img src="https://avatars.githubusercontent.com/u/118378677?v=4" width=115><br><sub>-RidiConHuracanes-</sub>](https://github.com/RidiConHuracanes) | [<img src="https://avatars.githubusercontent.com/u/117698707?v=4" width=115><br><sub>-Misa González-</sub>](https://github.com/ElMisaaa) |  
 | :---: | :---: | :---: |
