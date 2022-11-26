@@ -1,42 +1,36 @@
-####Botecitos_El_Juego
+#### Botecitos_El_Juego
 <h1 align="center">BOTECITOS: "El Juego"</h1>
-[![Título BotecitosTheJogo]("Botecitos El juego")](hhttps://github.com/AbelAvendanoArgueta/Botecitos_El_Juego/blob/main/recursos/imagenes/titulo_pant_inicial.pngttp:// "Título")
+![Título BotecitosTheJogo]("Botecitos El juego")](https://github.com/AbelAvendanoArgueta/Botecitos_El_Juego/blob/main/recursos/imagenes/titulo_pant_inicial.pngttp:// "Título")
    <p align="left">
-   <img src="https://img.shields.io/badge/Sígueme-%40medusin__corales-red"><img src="https://img.shields.io/badge/Sígueme-%40aosorio.13-blue"><img src="https://img.shields.io/badge/Sígueme-%40gg__misa__e1-orange">
+   <img src="https://img.shields.io/badge/Sígueme-%40medusin__corales-red"> <img src="https://img.shields.io/badge/Sígueme-%40aosorio.13-blue"> <img src="https://img.shields.io/badge/Sígueme-%40gg__misa__e1-orange">
    </p>
 
 ![GitHub Org's stars](https://img.shields.io/github/stars/AbelAvendanoArgueta/Botecitos_El_Juego?style=social)
 
-##Índice
+## Índice
 
 *[Insignias](#insignias)
 
-*[Descripción del proyecto](##Descripción del proyecto)
+*[Descripción del proyecto](#Descripción del proyecto)
 
 *[Estado del proyecto](#Estado-del-proyecto)
-
-*[Características de la aplicación y demostración](#Características-de-la-aplicación-y-demostración)
 
 *[Acceso al proyecto](#acceso-proyecto)
 
 *[Tecnologías utilizadas](#tecnologías-utilizadas)
 
-*[Personas Contribuyentes](#personas-contribuyentes)
-
 *[Personas-Desarrolladores del Proyecto](#personas-desarrolladores)
 
-*[Licencia](#licencia)
 
-*[Conclusión](#conclusión)
+## Descripción del proyecto
 
-##Descripción del proyecto
 BOTECITOS: "El juego", es un juego de botecitos basado en el clásico juego de mesa Battleship que es el clásico juego de combate naval que combina competitividad, estrategia y emoción.
 
 BOTECITOS (el videojogo) te introduce en una batalla cara a cara y puede jugase tanto multijugador entre dos jugadores al igual que en el singleplayer entre un jugador y la máquina, donde tratan de ubicar la flota enemiga y destruir sus naves una a una un disparo a la vez.
 
 El juego BOTECITOS, pone a sus jugadores justo en medio de la acción, donde pueden comandar una poderosa flota que incluye un portaaviones, un destructor, un submarino, un bote patrulla y un acorazado.
 
-Cada jugador escribe las coordenadas donde irán las balas de cada ataque esperando averle acertado a unaflota enemiga.
+Cada jugador escribe las coordenadas donde irán las balas de cada ataque esperando averle acertado a una flota enemiga.
 
 Anímate a jugar BOTECITOS the game y coloca tus naves muy estratégicamente para poder sobrevivir a los ataques incesantes de tu adversario a la vez que lanzas tus ataques con aciertos y fallos en el tablero de cuadrícula oceánica.
 
@@ -64,5 +58,5 @@ Ejecuar init.sh (si no tienes acceso a una terminal Bash, ejecuta program_init.p
 
 ## Autores
 
-| [<img src="https://avatars.githubusercontent.com/u/53498059?v=4" width=115><br><sub>-Abel Avendaño-</sub>](https://github.com/AbelAvendanoArgueta) |  [<img src="https://avatars.githubusercontent.com/u/118378677?v=4" width=115><br><sub>-RidiConHuracanes-</sub>]([https://github.com/RidiConHuracanes](https://github.com/ellenpimentel)) |  [<img src="https://github.com/ElMisaaa" width=115><br><sub>-Misael González-</sub>](https://avatars.githubusercontent.com/u/117698707?v=4) |
+| [<img src="https://avatars.githubusercontent.com/u/53498059?v=4" width=115><br><sub>-Abel Avendaño-</sub>](https://github.com/AbelAvendanoArgueta) |  [<img src="https://avatars.githubusercontent.com/u/118378677?v=4" width=115><br><sub>-RidiConHuracanes-</sub>]([https://github.com/RidiConHuracanes](https://github.com/ellenpimentel)) | [<img src="https://avatars.githubusercontent.com/u/117698707?v=4" width=115><br><sub>-Misa González-</sub>](https://github.com/ElMisaaa) |  
 | :---: | :---: | :---: |
