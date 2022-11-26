@@ -305,7 +305,98 @@ def opc_disp_barcos_dejugador(x, y, barco_seleccionado, barcos_colocados):
         barco_en_columna[columna:columna+largo] = [j]*largo
         columna = columna + largo + 1
     return barco_en_columna
-    
+
+def se_puede_colocar(largo, fila, columna, vertical, tablero_de_juego):
+    # Con esta funcion verificamos que la pocisiones en el tablero no 
+    # esten ocupadas y que podamos colocar el barco sin traslparlo
+    # con otro barco
+    if (vertical and fila+largo>cuadros_perLado):
+        alerta(texto_alerta_fuera)
+        return False
+    if (not vertical and columna+largo>cuadros_perLado):
+        alerta(texto_alerta_fuera)
+        return False
+    if vertical:
+        for y in range(max(0,fila-1), min(fila+largo+1, cuadros_perLado)):
+            for x in range(max(0,columna-1), min(columna + 2, cuadros_perLado)):
+                if tablero_de_juego[x][y]=='B':
+                    alerta(texto_alerta_barcos_juntos)
+                    return False
+    else:
+    # con este condificonal limitamos entre los distintos barcos
+        for y in range(max(0,fila-1), min(fila+2, cuadros_perLado)):
+            for x in range(max(0,columna-1), min(columna + largo+1, cuadros_perLado)):
+                if tablero_de_juego[x][y]=='B':
+                    alerta(texto_alerta_barcos_juntos)
+                    return False
+    return True
+
+def coloca_barcos(tablero_de_juego, x, y):
+    # Con esta funcion se colocan los barcos en tablero
+    tablero_procesado = []
+    for numero_fila in range(cuadros_perLado):
+        if numero_fila != y:
+            fila_antigua = tablero_de_juego[numero_fila]
+            tablero_procesado.append(fila_antigua)
+        else:
+            fila_antigua = tablero_de_juego[numero_fila]
+            fila_nueva = []
+            for numero_columna in range(cuadros_perLado):
+                if numero_columna != x:
+                    elemento_antiguo = fila_antigua[numero_columna]
+                    fila_nueva.append(elemento_antiguo)
+                else:
+                    elemento_antiguo = fila_antigua[numero_columna]
+                    if elemento_antiguo==' ':
+                        elemento_nuevo = 'B'
+                    elif elemento_antiguo=='B':
+                        elemento_nuevo = ' '
+                    else:
+                        elemento_nuevo = elemento_antiguo
+                    fila_nueva.append(elemento_nuevo)
+            tablero_procesado.append(fila_nueva)
+    return tablero_procesado
+
+def coloca_un_barco(tablero_de_juego, x, y, largo, vertical):
+    # Se marcan como ocupadas las casillas de la cuadricula
+    # segun si el barco se pocisiona en x (filas), o en y (columnas)
+    if vertical:
+        for j in range(largo):
+            tablero_de_juego = coloca_barcos(tablero_de_juego, x + j, y)
+    else:
+        for j in range(largo):
+            tablero_de_juego = coloca_barcos(tablero_de_juego, x, y + j)
+    return tablero_de_juego
+
+def colocar_barcos_viejo():
+    # Con esta funciona se cargan los barcos colocados
+    # previamente, y renderiza el tableto con las
+    # pocisiones ocupadas
+    primer_tablero = tablero_vacio()
+    segundo_tablero = tablero_vacio()
+    seguir_colocando = True
+    while seguir_colocando:
+        dibuja_tableros(primer_tablero, segundo_tablero)
+        sleep(0.1)
+        events = pygame.event.get()
+        # proceed events
+        for event in events:
+            if event.type == pygame.QUIT:
+                exit()
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+                seguir_colocando = False
+            elif event.type == pygame.MOUSEBUTTONUP:
+                x,y = pygame.mouse.get_pos()
+                print(x,y)
+                if ((medidas['margen'] <= x < medidas['margen'] + cuadros_perLado*medidas['lado_cuadrado']) and
+                    (medidas['margen'] <= y < medidas['margen'] + cuadros_perLado*medidas['lado_cuadrado'])):
+                    columna = (x - medidas['margen'])//medidas['lado_cuadrado']
+                    fila = (y - medidas['margen'])//medidas['lado_cuadrado']
+                    print(columna, fila)
+                    print(traducir_coordenadas_al_reves(fila, columna))
+                    primer_tablero = coloca_barcos(primer_tablero, fila, columna)
+    return primer_tablero
+
 def alerta(texto):
     # Funcion para lanzar alertas segun parametro
     # pasado a travez de variable 'texto'
