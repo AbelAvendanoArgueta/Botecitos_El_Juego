@@ -48,13 +48,13 @@ Anímate a jugar BOTECITOS the game y coloca tus naves muy estratégicamente par
 - `PVE`: El método de juego singleplayer PVE o Player versus Enviroment (Jugador contra Entorno), en el que si no cuentas con ningun amigo o vida social alguna, puedes jugar solo contra una máquina programada.
 - `PVP`: El método de juego multiplayer PVP o Player Versus Player (Jugador contra jugador), en el que juegas con tus amigos :D.
 
-\## 📁 Acceso al proyecto
+## 📁 Acceso al proyecto
 Descarga el proyecto
 
-\## 🛠️ Abre y ejecuta el proyecto
+## 🛠️ Abre y ejecuta el proyecto
 Ejecuar init.sh (si no tienes acceso a una terminal Bash, ejecuta program_init.py)
 
-#:ok:Tecnologías utilizadas
+# :ok:Tecnologías utilizadas
 - Python
 - Pygame
 - Bash
