@@ -11,6 +11,69 @@ reloj = pygame.time.Clock()
 def tomar_fuente(fuente_T): # fuente_T = Tamaño de la fuente 
     return pygame.font.Font(import_fuente, fuente_T) # Se importa la fuente, y se pasa la variable "fuente_T" para definir tamaño de la fuente
 
+def llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab):
+    # se llaman funcionar principales para definir tableros y barcos
+    boton_jugar_pve()
+    alerta('')
+    teclas = []
+    continua_curso_juego = True
+
+    while continua_curso_juego:
+        dibuja_tableros(primer_tablero, segundo_tablero)
+        dibuja_alerta()
+        sleep(0.1)
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.QUIT:
+                exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key==pygame.K_F10:
+                    boton_jugar_pve()
+                    dibuja_tableros(primer_tablero, segundo_tablero)
+                teclas.append(event.key)
+            if ((len(teclas)>=3) or
+                (teclas and
+                 (teclas[-1] in (pygame.K_RETURN, pygame.K_ESCAPE)))
+                ):
+                if (len(teclas)>=3) and (teclas[2]==pygame.K_RETURN):
+                    coordenadas = chr(teclas[0]) + chr(teclas[1])
+
+                    x,y = traducir_coordenadas(coordenadas)
+                    disparo_ok = ((0<=x<cuadros_perLado) and
+                                  (0<=y<cuadros_perLado) )
+                else:
+                    disparo_ok = False
+                teclas = []
+
+                if disparo_ok:
+                    print()
+                    imprimir_tablero(primer_tablero)
+                    print()
+                    imprimir_tablero(segundo_tablero)
+                    texto_jugador(coordenadas)
+                    comprueba_unidad_destruida(segundo_tablero, pos_barcos_sec_tab, x, y)
+                    segundo_tablero = ejecucion_Ddisparo(segundo_tablero, x, y)
+
+                    if ha_terminado(segundo_tablero):
+                        dibuja_tableros(primer_tablero, segundo_tablero)
+                        pygame.display.update()
+                        sleep(3)
+                        continua_curso_juego = False
+                    dibuja_tableros(primer_tablero, segundo_tablero)
+                    sleep(1)
+                    x,y = ataque_pc_nivel_2(oculta_posde_barcos(primer_tablero))
+                    texto_ordenador(traducir_coordenadas_al_reves(x,y))
+                    comprueba_unidad_destruida(primer_tablero, pos_barcos_first_tab, x, y)
+                    primer_tablero = ejecucion_Ddisparo(primer_tablero, x, y)
+                    if ha_terminado(primer_tablero):
+                        pygame.display.update()
+                        sleep(3)
+                        dibuja_tableros(primer_tablero, segundo_tablero)
+                        continua_curso_juego = False
+                else:
+                    texto_jugador('??')
+                    alerta(texto_coordenadas_erroneas)
+
 ### Dibujo, trazado y analisis de tableros
 def atravezar_tablero(tablero_de_juego):
     cruzando_tablero = [[' ']*cuadros_perLado for _ in range(cuadros_perLado)]
