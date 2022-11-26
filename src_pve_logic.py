@@ -397,6 +397,40 @@ def colocar_barcos_viejo():
                     primer_tablero = coloca_barcos(primer_tablero, fila, columna)
     return primer_tablero
 
+### Colocacion de barcos enemigos
+### Pc coloca sus propios barcos
+def pc_colocar_un_barco(tablero_de_juego, largo):
+    # pc coloca un solo barco
+    buena_posicion = False
+    while not buena_posicion:
+        vertical = choice([True, False])
+        if vertical:
+           columna = randint(0, cuadros_perLado-1)
+           fila = randint(0, cuadros_perLado-1-largo)
+        else: # if horizontal
+            columna = randint(0, cuadros_perLado-1-largo)
+            fila = randint(0, cuadros_perLado-1)
+        buena_posicion = se_puede_colocar(largo, fila, columna, vertical, tablero_de_juego)
+    tablero_procesado = coloca_un_barco(tablero_de_juego, fila, columna, largo, vertical)
+    if vertical:
+        posiciones_barco = [
+            (columna, fila + j) for j in range(largo)
+        ]
+    else:
+        posiciones_barco = [(columna+k, fila) for k in range(largo)]
+    return tablero_procesado, posiciones_barco
+
+def pc_verfica_barcos(longitud_barcos):
+    # pc verifica tablero, tipo de barcos y cantidad de barcos
+    # luego llama funcion "pc_colocar_un_barco" para colocarlos
+    tablero_de_juego = tablero_vacio()
+    posiciones_barcos = {}
+    for n,largo in enumerate(longitud_barcos):
+        tablero_de_juego, posiciones_barco = pc_colocar_un_barco(tablero_de_juego, largo)
+        posiciones_barcos[n] = posiciones_barco
+    return tablero_de_juego, posiciones_barcos
+
+
 def alerta(texto):
     # Funcion para lanzar alertas segun parametro
     # pasado a travez de variable 'texto'
