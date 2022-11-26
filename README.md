@@ -2,7 +2,7 @@
 
 <h1 align="center">BOTECITOS: "El Juego"</h1>
 
-![GitHub Org's stars](https://cdn.donmai.us/720x720/38/e3/38e32916b61d057f92560fee84de6bb8.webp)
+![BOTECITOS: el juego](https://github.com/AbelAvendanoArgueta/Botecitos_El_Juego/blob/main/recursos/imagenes/titulo_pant_inicial.png)
    <p align="left">
    <img src="https://img.shields.io/badge/Sígueme-%40medusin__corales-red"> <img src="https://img.shields.io/badge/Sígueme-%40aosorio.13-blue"> <img src="https://img.shields.io/badge/Sígueme-%40gg__misa__e1-yellow">
    </p>
