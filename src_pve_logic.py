@@ -493,6 +493,122 @@ def pc_verfica_barcos(longitud_barcos):
         posiciones_barcos[n] = posiciones_barco
     return tablero_de_juego, posiciones_barcos
 
+### Colocacion de barcos
+def colocar_barcos():
+    boton_jugar_pve()
+    num_barcos = len(longitud_barcos)
+    posiciones_barcos = {j:[] for j in range(num_barcos)}
+    primer_tablero = tablero_vacio()
+    segundo_tablero = tablero_duda()
+    y_coloca_barcos_min = medidas['margen'] + medidas['lado_cuadrado']*(cuadros_perLado+2)
+    y_coloca_barcos_max = y_coloca_barcos_min + medidas['lado_cuadrado']
+    x_coloca_barcos_min = medidas['separacion']
+    x_coloca_barcos_max = (x_coloca_barcos_min
+        + sum(largo for largo in longitud_barcos)*medidas['lado_cuadrado']
+        + sum(1 for largo in longitud_barcos)*medidas['lado_cuadrado']
+    )
+    seguir_colocando = True
+    barco_seleccionado = -1
+    barcos_colocados = [False]*len(longitud_barcos)
+    vertical = False
+    while seguir_colocando:
+        sleep(0.1)
+        dibuja_tableros(primer_tablero, segundo_tablero)
+        dibuja_alerta()
+        barco_en_columna = opc_disp_barcos_dejugador(
+            x_coloca_barcos_min, y_coloca_barcos_min,
+            barco_seleccionado, barcos_colocados)
+        if ((barco_seleccionado >= 0) and
+            (medidas['margen'] <= x < medidas['margen'] + cuadros_perLado*medidas['lado_cuadrado']) and
+            (medidas['margen'] <= y < medidas['margen'] + cuadros_perLado*medidas['lado_cuadrado'])):
+            columna = (x - medidas['margen'])//medidas['lado_cuadrado']
+            fila = (y - medidas['margen'])//medidas['lado_cuadrado']
+            largo = longitud_barcos[barco_seleccionado]
+            if vertical and (fila+largo <= cuadros_perLado):
+                dibuja_barcos_Dur_Col(largo, medidas['margen']+columna*medidas['lado_cuadrado'], medidas['margen']+fila*medidas['lado_cuadrado'], vertical, color=gris)
+            elif (not vertical) and (columna + largo <= cuadros_perLado):
+                dibuja_barcos_Dur_Col(largo, medidas['margen']+columna*medidas['lado_cuadrado'], medidas['margen']+fila*medidas['lado_cuadrado'], vertical, color=gris)
+        pygame.display.update()
+        events = pygame.event.get()
+        # proceed events
+        for event in events:
+            if event.type == pygame.QUIT:
+                exit()
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+                if sum(barcos_colocados)<num_barcos:
+                    alerta(texto_alerta_sin_terminar)
+                else:
+                    seguir_colocando = False
+            elif event.type == pygame.MOUSEMOTION:
+                x,y = pygame.mouse.get_pos()
+            elif event.type == pygame.MOUSEBUTTONUP:
+                x,y = pygame.mouse.get_pos()
+                if event.button==3:
+                    vertical = not vertical
+                elif ((barco_seleccionado>=0) and
+                      (medidas['margen'] <= x < medidas['margen'] + cuadros_perLado*medidas['lado_cuadrado']) and
+                      (medidas['margen'] <= y < medidas['margen'] + cuadros_perLado*medidas['lado_cuadrado'])):
+                    columna = (x - medidas['margen'])//medidas['lado_cuadrado']
+                    fila = (y - medidas['margen'])//medidas['lado_cuadrado']
+                    if se_puede_colocar(largo, fila, columna, vertical, primer_tablero):
+                        primer_tablero = coloca_un_barco(primer_tablero, fila, columna, largo, vertical)
+                        barcos_colocados[barco_seleccionado] = True
+                        if vertical:
+                            posiciones_barcos[barco_seleccionado] = [
+                                (columna, fila + j) for j in range(largo)
+                            ]
+                        else:
+                            posiciones_barcos[barco_seleccionado] = [
+                                (columna + j, fila) for j in range(largo)
+                            ]
+                        barco_seleccionado = -1
+                elif ((x_coloca_barcos_min <= x < x_coloca_barcos_max) and
+                    (y_coloca_barcos_min <= y < y_coloca_barcos_max)):
+                    columna = (x - x_coloca_barcos_min)//medidas['lado_cuadrado']
+                    barco_seleccionado = barco_en_columna[columna]
+                    if barcos_colocados[barco_seleccionado]:
+                        for columna, fila in posiciones_barcos[barco_seleccionado]:
+                            primer_tablero[columna][fila] = ' '
+                        barcos_colocados[barco_seleccionado] = False
+    alerta('')
+    return primer_tablero, posiciones_barcos
+
+def ha_terminado(tablero_de_juego):
+    for linea in tablero_de_juego:
+        for elemento in linea:
+            if elemento=='B':
+                return False
+    return True
+
+def texto_jugador(texto):
+    wth = tomar_fuente(20).render(texto, True, negro)
+    pygame.draw.rect(vt, blanco,
+                     (medidas['margen'] + medidas['tamaño_letra'] + medidas['lado_cuadrado']*cuadros_perLado, medidas['margen'],
+                      2*medidas['tamaño_letra'], medidas['tamaño_letra']))
+    vt.blit(wth, (medidas['margen'] + medidas['tamaño_letra'] + medidas['lado_cuadrado']*cuadros_perLado, medidas['margen']))
+
+def texto_ordenador(texto):
+    wth = tomar_fuente(20).render(texto, True, rojo)
+    pygame.draw.rect(vt, blanco,
+                     (medidas['margen'] + medidas['tamaño_letra'] + medidas['lado_cuadrado']*cuadros_perLado, medidas['margen'] + medidas['lado_cuadrado'],
+                      2*medidas['tamaño_letra'], medidas['tamaño_letra']))
+    vt.blit(wth, (medidas['margen'] + medidas['tamaño_letra'] + medidas['lado_cuadrado']*cuadros_perLado, medidas['margen'] + medidas['lado_cuadrado']))
+
+def texto_victoria(texto):
+    x = 50
+    y = 800 - medidas['tamaño_letra']*4
+    dibuja_texto_largo(texto, x, y, tomar_fuente(20), medidas['tamaño_letra'])
+
+def dibuja_texto_largo(texto, x, y, font, fontsize):
+    lineas = texto.splitlines()
+    pygame.draw.rect(vt, blanco,
+                     (x, y, medidas['ventana_ancho'] - x, fontsize*len(lineas)))
+    for i, l in enumerate(lineas):
+        vt.blit(font.render(l, True, negro), (x, y + fontsize*i))
+
+### Llamada de alertas
+tiempo_ultima_alerta = pygame.time.get_ticks()
+texto_alerta = ''
 
 def alerta(texto):
     # Funcion para lanzar alertas segun parametro
@@ -502,3 +618,43 @@ def alerta(texto):
     global texto_alerta, tiempo_ultima_alerta
     tiempo_ultima_alerta = pygame.time.get_ticks()
     texto_alerta = texto
+
+def dibuja_alerta():
+    hasta_aqui = int((pygame.time.get_ticks() - tiempo_ultima_alerta)/velocidad_texto)
+    texto = texto_alerta[:hasta_aqui]
+    x_alerta = 50
+    y_alerta = 800 - 100
+    pygame.draw.rect(vt, blanco,
+                     (x_alerta, y_alerta, medidas['ventana_ancho'], medidas['lado_cuadrado']))
+    vt.blit(tomar_fuente(20).render(texto, True, negro), (x_alerta, y_alerta))
+
+
+def pantalla_texto(texto_total):
+    boton_jugar_pve()
+    wth = tomar_fuente(20).render(título, True, negro)
+    vt.blit(wth, (medidas['ventana_ancho']/2 - wth.get_bounding_rect().width/2, 50))
+    tiempo_inicial = pygame.time.get_ticks()
+    while True:
+        reloj.tick(40)
+        hasta_aqui = int((pygame.time.get_ticks() - tiempo_inicial)/velocidad_texto)
+        texto = texto_total[:hasta_aqui]
+        dibuja_texto_largo(texto, 100, 200, tomar_fuente(20), medidas['tamaño_letra'])
+        pygame.display.update()
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.QUIT:
+                exit()
+            elif (event.type == pygame.KEYDOWN and
+                  event.key in (pygame.K_RETURN, pygame.K_ESCAPE)):
+                return event.key
+            elif (event.type == pygame.KEYDOWN and
+                  event.key in (pygame.K_SPACE, pygame.K_DOWN)):
+                # un truco para que ponga todo el texto
+                tiempo_inicial = -100000
+
+def volver_a_jugar():
+    tecla = pantalla_texto(texto_volver_a_jugar)
+    if tecla == pygame.K_RETURN:
+        return True
+    elif tecla == pygame.K_ESCAPE:
+        return False
