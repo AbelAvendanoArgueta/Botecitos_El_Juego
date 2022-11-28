@@ -1,4 +1,4 @@
-# Abel Fernando Avendaño Arguetaa
+# Abel Fernando Avendaño Argueta
 
 import pygame, sys
 from pygame.locals import *
