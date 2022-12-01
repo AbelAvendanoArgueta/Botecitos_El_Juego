@@ -14,16 +14,16 @@ def boton_jugar_pve():
     fdpi = pygame.image.load(imagen_mar)
     vt.blit(fdpi, (0, 0))
 
-class pve_logic():
+class pvp_logic():
     def llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab):
         # se llaman funcionar principales para definir tableros y barcos
         boton_jugar_pve()
-        pve_logic.alerta('')
+        pvp_logic.alerta('')
         teclas = []
         continua_curso_juego = True
 
         while continua_curso_juego:
-            pve_logic.dibuja_tableros(primer_tablero, segundo_tablero)
+            pvp_logic.dibuja_tableros(primer_tablero, segundo_tablero)
             sleep(0.1)
             events = pygame.event.get()
             for event in events:
@@ -32,7 +32,7 @@ class pve_logic():
                 elif event.type == pygame.KEYDOWN:
                     if event.key==pygame.K_F10:
                         boton_jugar_pve()
-                        pve_logic.dibuja_tableros(primer_tablero, segundo_tablero)
+                        pvp_logic.dibuja_tableros(primer_tablero, segundo_tablero)
                     teclas.append(event.key)
                 if ((len(teclas)>=3) or
                     (teclas and
@@ -41,7 +41,7 @@ class pve_logic():
                     if (len(teclas)>=3) and (teclas[2]==pygame.K_RETURN):
                         coordenadas = chr(teclas[0]) + chr(teclas[1])
 
-                        x,y = pve_logic.traducir_coordenadas(coordenadas)
+                        x,y = pvp_logic.traducir_coordenadas(coordenadas)
                         disparo_ok = ((0<=x<cuadros_perLado) and
                                     (0<=y<cuadros_perLado) )
                     else:
@@ -50,32 +50,32 @@ class pve_logic():
 
                     if disparo_ok:
                         print()
-                        pve_logic.imprimir_tablero(primer_tablero)
+                        pvp_logic.imprimir_tablero(primer_tablero)
                         print()
-                        pve_logic.imprimir_tablero(segundo_tablero)
-                        pve_logic.texto_jugador(coordenadas)
-                        pve_logic.comprueba_unidad_destruida(segundo_tablero, pos_barcos_sec_tab, x, y)
-                        segundo_tablero = pve_logic.ejecucion_Ddisparo(segundo_tablero, x, y)
+                        pvp_logic.imprimir_tablero(segundo_tablero)
+                        pvp_logic.texto_jugador(coordenadas)
+                        pvp_logic.comprueba_unidad_destruida(segundo_tablero, pos_barcos_sec_tab, x, y)
+                        segundo_tablero = pvp_logic.ejecucion_Ddisparo(segundo_tablero, x, y)
 
-                        if pve_logic.ha_terminado(segundo_tablero):
-                            pve_logic.dibuja_tableros(primer_tablero, segundo_tablero)
+                        if pvp_logic.ha_terminado(segundo_tablero):
+                            pvp_logic.dibuja_tableros(primer_tablero, segundo_tablero)
                             pygame.display.update()
                             sleep(3)
                             continua_curso_juego = False
-                        pve_logic.dibuja_tableros(primer_tablero, segundo_tablero)
+                        pvp_logic.dibuja_tableros(primer_tablero, segundo_tablero)
                         sleep(1)
-                        x,y = pve_logic.ataque_pc_nivel_2(pve_logic.oculta_posde_barcos(primer_tablero))
-                        pve_logic.texto_ordenador(pve_logic.traducir_coordenadas_al_reves(x,y))
-                        pve_logic.comprueba_unidad_destruida(primer_tablero, pos_barcos_first_tab, x, y)
-                        primer_tablero = pve_logic.ejecucion_Ddisparo(primer_tablero, x, y)
-                        if pve_logic.ha_terminado(primer_tablero):
+                        x,y = pvp_logic.ataque_pc_nivel_2(pvp_logic.oculta_posde_barcos(primer_tablero))
+                        pvp_logic.texto_ordenador(pvp_logic.traducir_coordenadas_al_reves(x,y))
+                        pvp_logic.comprueba_unidad_destruida(primer_tablero, pos_barcos_first_tab, x, y)
+                        primer_tablero = pvp_logic.ejecucion_Ddisparo(primer_tablero, x, y)
+                        if pvp_logic.ha_terminado(primer_tablero):
                             pygame.display.update()
                             sleep(3)
-                            pve_logic.dibuja_tableros(primer_tablero, segundo_tablero)
+                            pvp_logic.dibuja_tableros(primer_tablero, segundo_tablero)
                             continua_curso_juego = False
                     else:
-                        pve_logic.texto_jugador('??')
-                        pve_logic.alerta(texto_coordenadas_erroneas)
+                        pvp_logic.texto_jugador('??')
+                        pvp_logic.alerta(texto_coordenadas_erroneas)
 
     ### Dibujo, trazado y analisis de tableros
     def atravezar_tablero(tablero_de_juego):
@@ -86,7 +86,7 @@ class pve_logic():
         return cruzando_tablero
 
     def imprimir_tablero(tablero_de_juego):
-        cruzando_tablero = pve_logic.atravezar_tablero(tablero_de_juego)
+        cruzando_tablero = pvp_logic.atravezar_tablero(tablero_de_juego)
         for fila in cruzando_tablero:
             print(fila)
 
@@ -119,7 +119,7 @@ class pve_logic():
     def dib_tablero_de_juego(Coordenadas_en_X0,Coordenadas_en_Y0,tablero_de_juego):
         # Se dibuja tablero de juego
 
-        pve_logic.d_cuadricula_dTabs(Coordenadas_en_X0,Coordenadas_en_Y0)
+        pvp_logic.d_cuadricula_dTabs(Coordenadas_en_X0,Coordenadas_en_Y0)
         # se toman las coordenadas de la cuadricula de los tableros
         for fila in range(cuadros_perLado):
             for columna in range(cuadros_perLado):
@@ -152,13 +152,13 @@ class pve_logic():
         # Primer Tablero
         Coordenadas_en_X0 = medidas['margen']
         Coordenadas_en_Y0 = medidas['margen']
-        pve_logic.dib_tablero_de_juego(Coordenadas_en_X0,Coordenadas_en_Y0,primer_tablero)
+        pvp_logic.dib_tablero_de_juego(Coordenadas_en_X0,Coordenadas_en_Y0,primer_tablero)
         Coordenadas_en_X0 = medidas['margen'] + medidas['separacion'] + medidas['lado_cuadrado']*cuadros_perLado
         Coordenadas_en_Y0 = medidas['margen']
 
         # Segundo Tablero
-        segundo_tablero_OcuPos = pve_logic.oculta_posde_barcos(segundo_tablero)
-        pve_logic.dib_tablero_de_juego(Coordenadas_en_X0,Coordenadas_en_Y0,segundo_tablero_OcuPos)
+        segundo_tablero_OcuPos = pvp_logic.oculta_posde_barcos(segundo_tablero)
+        pvp_logic.dib_tablero_de_juego(Coordenadas_en_X0,Coordenadas_en_Y0,segundo_tablero_OcuPos)
         pygame.display.update() # necesario para refrescar con tablero sub-procesado
         # Se procesa tablero de oponente para ocultar pocisiones de barcos, y devolver
         # un tablero donde lo unico que se ve es la cuadricula
@@ -180,10 +180,10 @@ class pve_logic():
         y = randint(0,cuadros_perLado-1)
         #Puede ser desconocido, o barco, porque el tablero_de_juego llega ofuscado
         if tablero_de_juego[x][y]==' ':
-            print('El ordenador dispara:', pve_logic.traducir_coordenadas_al_reves(x, y))
+            print('El ordenador dispara:', pvp_logic.traducir_coordenadas_al_reves(x, y))
         else:
             print('aquí ya he disparado, mejor vuelvo a lanzar los dados')
-            x,y = pve_logic.ataque_pc_nivel_1(tablero_de_juego)
+            x,y = pvp_logic.ataque_pc_nivel_1(tablero_de_juego)
         return x,y
 
     def traducir_coordenadas_al_reves(x,y):
@@ -215,7 +215,7 @@ class pve_logic():
 
     def se_verifica_VecinoX(tablero_de_juego, x, y):
         # Se verifica si casilla vecina en X puede ser posicion enemiga
-        vecinos = pve_logic.verificar_posicionTab(x,y)
+        vecinos = pvp_logic.verificar_posicionTab(x,y)
         return any(tablero_de_juego[x_vecino][y_vecino]=='X'
                 for (x_vecino, y_vecino) in vecinos)
 
@@ -225,12 +225,12 @@ class pve_logic():
         casillas_prioritarias = [
             (x,y) for x in range(cuadros_perLado)
                 for y in range(cuadros_perLado)
-            if (tablero_de_juego[x][y]==' ') and pve_logic.se_verifica_VecinoX(tablero_de_juego, x,y)
+            if (tablero_de_juego[x][y]==' ') and pvp_logic.se_verifica_VecinoX(tablero_de_juego, x,y)
             ]
         if len(casillas_prioritarias) > 0:
             x,y = choice(casillas_prioritarias)
         else:
-            x,y = pve_logic.ataque_pc_nivel_1(tablero_de_juego)
+            x,y = pvp_logic.ataque_pc_nivel_1(tablero_de_juego)
         return x,y
 
     def ejecucion_Ddisparo(tablero_de_juego, x, y):
@@ -289,7 +289,7 @@ class pve_logic():
     def comprueba_unidad_destruida(tablero_de_juego, posiciones_barcos, x, y):
         if tablero_de_juego[x][y] != 'B':
             return False
-        if not pve_logic.se_verifica_VecinoX(tablero_de_juego, x, y):
+        if not pvp_logic.se_verifica_VecinoX(tablero_de_juego, x, y):
             return False
         for j, posiciones_barco in posiciones_barcos.items():
             if any( (xbarco==x ) and (ybarco==y)
@@ -326,7 +326,7 @@ class pve_logic():
                         y = y_ultima
                         if x<cuadros_perLado and tablero_de_juego[x][y] == ' ':
                             tablero_de_juego[x][y] = '.'
-                    pve_logic.alerta(texto_alerta_hundido)
+                    pvp_logic.alerta(texto_alerta_hundido)
                     return True
 
     ### Trazado de barcos
@@ -367,7 +367,7 @@ class pve_logic():
                 color = verde
             else:
                 color = gris
-            pve_logic.dibuja_barcos_Dur_Col(largo, x + columna*medidas['lado_cuadrado'], y, False, color)
+            pvp_logic.dibuja_barcos_Dur_Col(largo, x + columna*medidas['lado_cuadrado'], y, False, color)
             barco_en_columna[columna:columna+largo] = [j]*largo
             columna = columna + largo + 1
         return barco_en_columna
@@ -377,23 +377,23 @@ class pve_logic():
         # esten ocupadas y que podamos colocar el barco sin traslparlo
         # con otro barco
         if (vertical and fila+largo>cuadros_perLado):
-            pve_logic.alerta(texto_alerta_fuera)
+            pvp_logic.alerta(texto_alerta_fuera)
             return False
         if (not vertical and columna+largo>cuadros_perLado):
-            pve_logic.alerta(texto_alerta_fuera)
+            pvp_logic.alerta(texto_alerta_fuera)
             return False
         if vertical:
             for y in range(max(0,fila-1), min(fila+largo+1, cuadros_perLado)):
                 for x in range(max(0,columna-1), min(columna + 2, cuadros_perLado)):
                     if tablero_de_juego[x][y]=='B':
-                        pve_logic.alerta(texto_alerta_barcos_juntos)
+                        pvp_logic.alerta(texto_alerta_barcos_juntos)
                         return False
         else:
         # con este condificonal limitamos entre los distintos barcos
             for y in range(max(0,fila-1), min(fila+2, cuadros_perLado)):
                 for x in range(max(0,columna-1), min(columna + largo+1, cuadros_perLado)):
                     if tablero_de_juego[x][y]=='B':
-                        pve_logic.alerta(texto_alerta_barcos_juntos)
+                        pvp_logic.alerta(texto_alerta_barcos_juntos)
                         return False
         return True
 
@@ -428,21 +428,21 @@ class pve_logic():
         # segun si el barco se pocisiona en x (filas), o en y (columnas)
         if vertical:
             for j in range(largo):
-                tablero_de_juego = pve_logic.coloca_barcos(tablero_de_juego, x + j, y)
+                tablero_de_juego = pvp_logic.coloca_barcos(tablero_de_juego, x + j, y)
         else:
             for j in range(largo):
-                tablero_de_juego = pve_logic.coloca_barcos(tablero_de_juego, x, y + j)
+                tablero_de_juego = pvp_logic.coloca_barcos(tablero_de_juego, x, y + j)
         return tablero_de_juego
 
     def colocar_barcos_viejo():
         # Con esta funciona se cargan los barcos colocados
         # previamente, y renderiza el tableto con las
         # pocisiones ocupadas
-        primer_tablero = pve_logic.tablero_vacio()
-        segundo_tablero = pve_logic.tablero_vacio()
+        primer_tablero = pvp_logic.tablero_vacio()
+        segundo_tablero = pvp_logic.tablero_vacio()
         seguir_colocando = True
         while seguir_colocando:
-            pve_logic.dibuja_tableros(primer_tablero, segundo_tablero)
+            pvp_logic.dibuja_tableros(primer_tablero, segundo_tablero)
             sleep(0.1)
             events = pygame.event.get()
             # proceed events
@@ -459,8 +459,8 @@ class pve_logic():
                         columna = (x - medidas['margen'])//medidas['lado_cuadrado']
                         fila = (y - medidas['margen'])//medidas['lado_cuadrado']
                         print(columna, fila)
-                        print(pve_logic.traducir_coordenadas_al_reves(fila, columna))
-                        primer_tablero = pve_logic.coloca_barcos(primer_tablero, fila, columna)
+                        print(pvp_logic.traducir_coordenadas_al_reves(fila, columna))
+                        primer_tablero = pvp_logic.coloca_barcos(primer_tablero, fila, columna)
         return primer_tablero
 
     ### Colocacion de barcos enemigos
@@ -476,8 +476,8 @@ class pve_logic():
             else: # if horizontal
                 columna = randint(0, cuadros_perLado-1-largo)
                 fila = randint(0, cuadros_perLado-1)
-            buena_posicion = pve_logic.se_puede_colocar(largo, fila, columna, vertical, tablero_de_juego)
-        tablero_procesado = pve_logic.coloca_un_barco(tablero_de_juego, fila, columna, largo, vertical)
+            buena_posicion = pvp_logic.se_puede_colocar(largo, fila, columna, vertical, tablero_de_juego)
+        tablero_procesado = pvp_logic.coloca_un_barco(tablero_de_juego, fila, columna, largo, vertical)
         if vertical:
             posiciones_barco = [
                 (columna, fila + j) for j in range(largo)
@@ -489,10 +489,10 @@ class pve_logic():
     def pc_verfica_barcos(longitud_barcos):
         # pc verifica tablero, tipo de barcos y cantidad de barcos
         # luego llama funcion "pc_colocar_un_barco" para colocarlos
-        tablero_de_juego = pve_logic.tablero_vacio()
+        tablero_de_juego = pvp_logic.tablero_vacio()
         posiciones_barcos = {}
         for n,largo in enumerate(longitud_barcos):
-            tablero_de_juego, posiciones_barco = pve_logic.pc_colocar_un_barco(tablero_de_juego, largo)
+            tablero_de_juego, posiciones_barco = pvp_logic.pc_colocar_un_barco(tablero_de_juego, largo)
             posiciones_barcos[n] = posiciones_barco
         return tablero_de_juego, posiciones_barcos
 
@@ -501,8 +501,8 @@ class pve_logic():
         boton_jugar_pve()
         num_barcos = len(longitud_barcos)
         posiciones_barcos = {j:[] for j in range(num_barcos)}
-        primer_tablero = pve_logic.tablero_vacio()
-        segundo_tablero = pve_logic.tablero_duda()
+        primer_tablero = pvp_logic.tablero_vacio()
+        segundo_tablero = pvp_logic.tablero_duda()
         y_coloca_barcos_min = medidas['margen'] + medidas['lado_cuadrado']*(cuadros_perLado+2)
         y_coloca_barcos_max = y_coloca_barcos_min + medidas['lado_cuadrado']
         x_coloca_barcos_min = medidas['separacion']
@@ -516,8 +516,8 @@ class pve_logic():
         vertical = False
         while seguir_colocando:
             sleep(0.1)
-            pve_logic.dibuja_tableros(primer_tablero, segundo_tablero)
-            barco_en_columna = pve_logic.opc_disp_barcos_dejugador(
+            pvp_logic.dibuja_tableros(primer_tablero, segundo_tablero)
+            barco_en_columna = pvp_logic.opc_disp_barcos_dejugador(
                 x_coloca_barcos_min, y_coloca_barcos_min,
                 barco_seleccionado, barcos_colocados)
             if ((barco_seleccionado >= 0) and
@@ -527,9 +527,9 @@ class pve_logic():
                 fila = (y - medidas['margen'])//medidas['lado_cuadrado']
                 largo = longitud_barcos[barco_seleccionado]
                 if vertical and (fila+largo <= cuadros_perLado):
-                    pve_logic.dibuja_barcos_Dur_Col(largo, medidas['margen']+columna*medidas['lado_cuadrado'], medidas['margen']+fila*medidas['lado_cuadrado'], vertical, color=gris)
+                    pvp_logic.dibuja_barcos_Dur_Col(largo, medidas['margen']+columna*medidas['lado_cuadrado'], medidas['margen']+fila*medidas['lado_cuadrado'], vertical, color=gris)
                 elif (not vertical) and (columna + largo <= cuadros_perLado):
-                    pve_logic.dibuja_barcos_Dur_Col(largo, medidas['margen']+columna*medidas['lado_cuadrado'], medidas['margen']+fila*medidas['lado_cuadrado'], vertical, color=gris)
+                    pvp_logic.dibuja_barcos_Dur_Col(largo, medidas['margen']+columna*medidas['lado_cuadrado'], medidas['margen']+fila*medidas['lado_cuadrado'], vertical, color=gris)
             pygame.display.update()
             events = pygame.event.get()
             # proceed events
@@ -538,7 +538,7 @@ class pve_logic():
                     exit()
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                     if sum(barcos_colocados)<num_barcos:
-                        pve_logic.alerta(texto_alerta_sin_terminar)
+                        pvp_logic.alerta(texto_alerta_sin_terminar)
                     else:
                         seguir_colocando = False
                 elif event.type == pygame.MOUSEMOTION:
@@ -552,8 +552,8 @@ class pve_logic():
                         (medidas['margen'] <= y < medidas['margen'] + cuadros_perLado*medidas['lado_cuadrado'])):
                         columna = (x - medidas['margen'])//medidas['lado_cuadrado']
                         fila = (y - medidas['margen'])//medidas['lado_cuadrado']
-                        if pve_logic.se_puede_colocar(largo, fila, columna, vertical, primer_tablero):
-                            primer_tablero = pve_logic.coloca_un_barco(primer_tablero, fila, columna, largo, vertical)
+                        if pvp_logic.se_puede_colocar(largo, fila, columna, vertical, primer_tablero):
+                            primer_tablero = pvp_logic.coloca_un_barco(primer_tablero, fila, columna, largo, vertical)
                             barcos_colocados[barco_seleccionado] = True
                             if vertical:
                                 posiciones_barcos[barco_seleccionado] = [
@@ -572,7 +572,7 @@ class pve_logic():
                             for columna, fila in posiciones_barcos[barco_seleccionado]:
                                 primer_tablero[columna][fila] = ' '
                             barcos_colocados[barco_seleccionado] = False
-        pve_logic.alerta('')
+        pvp_logic.alerta('')
         return primer_tablero, posiciones_barcos
 
     def ha_terminado(tablero_de_juego):
@@ -599,7 +599,7 @@ class pve_logic():
     def texto_victoria(texto):
         x = 50
         y = 800 - medidas['tamaño_letra']*4
-        pve_logic.dibuja_texto_largo(texto, x, y, tomar_fuente(20), medidas['tamaño_letra'])
+        pvp_logic.dibuja_texto_largo(texto, x, y, tomar_fuente(20), medidas['tamaño_letra'])
 
     def dibuja_texto_largo(texto, x, y, font, fontsize):
         lineas = texto.splitlines()
@@ -630,7 +630,7 @@ class pve_logic():
             reloj.tick(40)
             hasta_aqui = int((pygame.time.get_ticks() - tiempo_inicial)/velocidad_texto)
             texto = texto_total[:hasta_aqui]
-            pve_logic.dibuja_texto_largo(texto, 100, 200, tomar_fuente(20), medidas['tamaño_letra'])
+            pvp_logic.dibuja_texto_largo(texto, 100, 200, tomar_fuente(20), medidas['tamaño_letra'])
             pygame.display.update()
             events = pygame.event.get()
             for event in events:
@@ -645,7 +645,7 @@ class pve_logic():
                     tiempo_inicial = -100000
 
     def volver_a_jugar():
-        tecla = pve_logic.pantalla_texto(texto_volver_a_jugar)
+        tecla = pvp_logic.pantalla_texto(texto_volver_a_jugar)
         if tecla == pygame.K_RETURN:
             return True
         elif tecla == pygame.K_ESCAPE:

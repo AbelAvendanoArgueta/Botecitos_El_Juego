@@ -30,7 +30,7 @@ longitud_barcos = [1]
     # Esta variable nos permite facilmente cambiar
     # la forma en la que trabaja la funcion
     # opc_disp_barcos_dejugador()
-cuadros_perLado = 2
+cuadros_perLado = 2 # no puede ser menor a 2
     # cuadros por lado define el tamaño
     # del tablero por medio de la cuadricula
     # por lado 

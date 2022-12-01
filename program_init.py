@@ -5,6 +5,7 @@ from pygame.locals import *
 from src_boton import *
 from src_parametros_generales import *
 from src_pve_logic import *
+from src_pvp_logic import *
 
 pygame.init()
 # vt = Ventana inicial
@@ -93,7 +94,7 @@ def boton_jugar():
                     boton_jugar_pve()
                     iniciar_juego_pve()
                 if btn_jugar_pvp.checkForInput(cur_pos):
-                    boton_jugar_pvp()
+                    iniciar_juego_pvp()
      
         pygame.display.update()
 
@@ -124,32 +125,6 @@ def caratula():
                 if jtxt_retornar.checkForInput(cur_pos):
                     main_menu()
         
-        pygame.display.update()
-
-def boton_jugar_pve():
-    vt = pygame.display.set_mode((medidas['ventana_ancho'], medidas['ventana_alto']))
-    fdpi = pygame.image.load(imagen_mar)
-    vt.blit(fdpi, (0, 0))
-
-def boton_jugar_pvp():
-    while True: # Se define ciclica la siguiente parte del codigo
-        cur_pos = pygame.mouse.get_pos()
-        fdpmdj = pygame.image.load(imagen_mar)
-        vt.blit(fdpmdj, (0, 0))
-        
-        jtxt_retornar = Boton(image=None, pos=(640, 565), 
-                            text_input="retornar", font=tomar_fuente(65), base_color=blanco, hovering_color=rojo)
-
-
-        jtxt_retornar.changeColor(cur_pos)
-        jtxt_retornar.update(vt)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if jtxt_retornar.checkForInput(cur_pos):
-                    boton_jugar()   
         pygame.display.update()
 
 def ventana_pruebas():
@@ -194,15 +169,34 @@ def iniciar_juego_pve():
 
     while continua_curso_juego:
         ##### INTRO #### 
-        primer_tablero, pos_barcos_first_tab = colocar_barcos()
-        segundo_tablero, pos_barcos_sec_tab = pc_verfica_barcos(longitud_barcos)
+        primer_tablero, pos_barcos_first_tab = pve_logic.colocar_barcos()
+        segundo_tablero, pos_barcos_sec_tab = pve_logic.pc_verfica_barcos(longitud_barcos)
         print()
-        imprimir_tablero(primer_tablero)
+        pve_logic.imprimir_tablero(primer_tablero)
         print(pos_barcos_first_tab)
-        imprimir_tablero(segundo_tablero)
+        pve_logic.imprimir_tablero(segundo_tablero)
         print(pos_barcos_sec_tab)
-        llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab) # Disparar a los barcos enemigos
-        continua_curso_juego = volver_a_jugar() # desea jugar otra vez?
+        pve_logic.llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab) # Disparar a los barcos enemigos
+        continua_curso_juego = pve_logic.volver_a_jugar() # desea jugar otra vez?
+
+def iniciar_juego_pvp(): 
+    
+    ## Esta funcion se llama en el momento que hacemos click 
+    ## en el boton PVP e inicializa toda la logica del juego
+    continua_curso_juego = True
+
+    while continua_curso_juego:
+        ##### INTRO #### 
+        primer_tablero, pos_barcos_first_tab = pvp_logic.colocar_barcos()
+        segundo_tablero, pos_barcos_sec_tab = pvp_logic.pc_verfica_barcos(longitud_barcos)
+        print()
+        pvp_logic.imprimir_tablero(primer_tablero)
+        print(pos_barcos_first_tab)
+        pvp_logic.imprimir_tablero(segundo_tablero)
+        print(pos_barcos_sec_tab)
+        pvp_logic.llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab) # Disparar a los barcos enemigos
+        continua_curso_juego = pvp_logic.volver_a_jugar() # desea jugar otra vez?
+
 if __name__ == "__main__": 
     # Cuando ejecutamos el programa
     # esta es la primera funcion que se llama
