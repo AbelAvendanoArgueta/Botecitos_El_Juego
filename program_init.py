@@ -93,8 +93,8 @@ def boton_jugar():
                 if btn_jugar_pve.checkForInput(cur_pos):
                     boton_jugar_pve()
                     iniciar_juego_pve()
-                if btn_jugar_pvp.checkForInput(cur_pos):
-                    iniciar_juego_pvp()
+                # if btn_jugar_pvp.checkForInput(cur_pos):
+                    # iniciar_juego_pvp()
      
         pygame.display.update()
 
@@ -179,7 +179,7 @@ def iniciar_juego_pve():
         pve_logic.llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab) # Disparar a los barcos enemigos
         continua_curso_juego = pve_logic.volver_a_jugar() # desea jugar otra vez?
 
-def iniciar_juego_pvp(): 
+""" def iniciar_juego_pvp(): 
     
     ## Esta funcion se llama en el momento que hacemos click 
     ## en el boton PVP e inicializa toda la logica del juego
@@ -196,6 +196,7 @@ def iniciar_juego_pvp():
         print(pos_barcos_sec_tab)
         pvp_logic.llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab) # Disparar a los barcos enemigos
         continua_curso_juego = pvp_logic.volver_a_jugar() # desea jugar otra vez?
+        """
 
 if __name__ == "__main__": 
     # Cuando ejecutamos el programa
