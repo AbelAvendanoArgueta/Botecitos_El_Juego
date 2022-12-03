@@ -4,6 +4,8 @@
 
 ![BOTECITOS: el juego](https://github.com/AbelAvendanoArgueta/Botecitos_El_Juego/blob/main/recursos/imagenes/titulo_pant_inicial.png)
    <p align="left">
+   [![Sigueme](https://img.shields.io/badge/Sígueme-%40medusin__corales-red)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+   
    <img src="https://img.shields.io/badge/Sígueme-%40medusin__corales-red"> <img src="https://img.shields.io/badge/Sígueme-%40aosorio.13-blue"> <img src="https://img.shields.io/badge/Sígueme-%40gg__misa__e1-yellow">
    </p>
 
