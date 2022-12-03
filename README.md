@@ -3,9 +3,12 @@
 <h1 align="center">BOTECITOS: "El Juego"</h1>
 
 ![BOTECITOS: el juego](https://github.com/AbelAvendanoArgueta/Botecitos_El_Juego/blob/main/recursos/imagenes/titulo_pant_inicial.png)
-   <p align="left">
-   <img src="https://img.shields.io/badge/Sígueme-%40medusin__corales-red"> <img src="https://img.shields.io/badge/Sígueme-%40aosorio.13-blue"> <img src="https://img.shields.io/badge/Sígueme-%40gg__misa__e1-yellow">
-   </p>
+   
+<p align="left">
+
+[![Sigueme !](https://img.shields.io/badge/Sígueme-%40medusin__corales-red)](https://www.instagram.com/medusin_corales/)
+[![Sigueme !](https://img.shields.io/badge/Sígueme-%40aosorio.13-blue)](https://instagram.com/aosorio.13?igshid=ZmVmZTY5ZGE=)[![Sigueme !](https://img.shields.io/badge/Sígueme-%40gg__misa__e1-yellow)](https://instagram.com/gg_misa_e1?igshid=ZmVmZTY5ZGE=)
+</p>
 
 ![GitHub Org's stars](https://img.shields.io/github/stars/AbelAvendanoArgueta/Botecitos_El_Juego?style=social)
 
