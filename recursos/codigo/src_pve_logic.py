@@ -2,7 +2,7 @@ import pygame, sys
 from pygame.locals import *
 from random import *
 from time import *
-from src_parametros_generales import *
+from recursos.codigo.src_parametros_generales import *
 
 vt = pygame.display.set_mode((medidas['ventana_ancho'], medidas['ventana_alto']))
 reloj = pygame.time.Clock()

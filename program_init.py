@@ -2,10 +2,10 @@
 
 import pygame, sys
 from pygame.locals import *
-from src_boton import *
-from src_parametros_generales import *
-from src_pve_logic import *
-from src_pvp_logic import *
+from recursos.codigo.src_boton import *
+from recursos.codigo.src_parametros_generales import *
+from recursos.codigo.src_pve_logic import *
+from recursos.codigo.src_pvp_logic import *
 
 pygame.init()
 # vt = Ventana inicial
