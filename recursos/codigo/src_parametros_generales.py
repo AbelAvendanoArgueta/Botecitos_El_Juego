@@ -10,9 +10,12 @@ medidas = {
 }
 
 # Conexiones
+# Si da algun error, porque el puerto sigue
+# puede cambiar el valor de puerto por cualquier
+# otro numerados del 0 al 65535
 conexiones = {
     "host": "127.0.0.1",
-    "puerto": 33000,
+    "puerto": 33000, 
     "buffer": 1024,
 }
 
