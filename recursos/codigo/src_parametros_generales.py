@@ -2,23 +2,32 @@
 medidas = {
     'lado_cuadrado': 30,
     'separacion': 100,
-    'margen': 100, #Debe ser mayor que LADO_CUADRADO
+    'margen': 100, # Debe ser mayor que LADO_CUADRADO
     'tamaño_letra': 15,
     'tamaño_letra_grande': 30,
     'ventana_ancho': 1280,
     'ventana_alto': 650,
 }
 
+# Conexiones
+conexiones = {
+    "host": "127.0.0.1",
+    "puerto": 33000,
+    "buffer": 1024,
+}
+
 # colores
 blanco = (255,255,255)
 negro = (0,0,0)
-gris = ("#3d4c4f")
+gris = (61,76,79)
+gris_claro = (152, 161, 162)
 rojo = (255,0,0)
 verde = (0, 255, 0)
 azul = (0, 0, 255)
-azul_per = ("#3daee9")
-amarillo_per = ("#f7eb95")
-naranja = ("Orange")
+celeste = (61,174,233)
+amarillo = (247, 235, 149)
+naranja = (244, 56, 34)
+rosado = (153, 29, 132)
 
 
 # Tipeo de texto

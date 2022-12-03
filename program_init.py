@@ -31,11 +31,11 @@ def main_menu():
         
 
         btn_jugar = Boton(image=pygame.image.load(imagen_boton), pos=(400, 350), 
-                            text_input="Jugar", font=tomar_fuente(70), base_color=blanco, hovering_color=amarillo_per)
+                            text_input="Jugar", font=tomar_fuente(70), base_color=blanco, hovering_color=amarillo)
         btn_salir = Boton(image=pygame.image.load(imagen_boton), pos=(400, 475), 
-                            text_input="Salir", font=tomar_fuente(70), base_color=blanco, hovering_color=amarillo_per)
+                            text_input="Salir", font=tomar_fuente(70), base_color=blanco, hovering_color=amarillo)
         btn_coders = Boton(image=None, pos=(770, 570), 
-                            text_input="❯", font=tomar_fuente(30), base_color=azul_per, hovering_color="Green")
+                            text_input="❯", font=tomar_fuente(30), base_color=celeste, hovering_color=verde)
              
 
         for button in [btn_jugar, btn_salir, btn_coders,titulo_juego]:
@@ -68,9 +68,9 @@ def boton_jugar():
         ## Texto Jugar
         # jugar_txt = da formato a nuestro texto
         btn_jugar_pve = Boton(image=pygame.image.load(imagen_boton), pos=(290, 435), 
-                            text_input="PVE", font=tomar_fuente(70), base_color=blanco, hovering_color="Green")
+                            text_input="PVE", font=tomar_fuente(70), base_color=blanco, hovering_color=verde)
         btn_jugar_pvp = Boton(image=pygame.image.load(imagen_boton), pos=(965, 215), 
-                            text_input="PVP", font=tomar_fuente(70), base_color=blanco, hovering_color="Green")
+                            text_input="PVP", font=tomar_fuente(70), base_color=blanco, hovering_color=verde)
         
         jtxt_retornar = Boton(image=None, pos=(640, 565), 
                             text_input="retornar", font=tomar_fuente(65), base_color=blanco, hovering_color=rojo)
@@ -108,7 +108,7 @@ def caratula():
         # Texto Pruebas
 
         jtxt_retornar = Boton(image=None, pos=(1150, 620), 
-                        text_input="retornar", font=tomar_fuente(30), base_color="Orange", hovering_color="Green")
+                        text_input="retornar", font=tomar_fuente(30), base_color=naranja, hovering_color=verde)
 
         for button in [jtxt_retornar]:
                 button.changeColor(cur_pos)
