@@ -3,28 +3,39 @@
 <h1 align="center">BOTECITOS: "El Juego"</h1>
 
 ![BOTECITOS: el juego](https://github.com/AbelAvendanoArgueta/Botecitos_El_Juego/blob/main/recursos/imagenes/titulo_pant_inicial.png)
-   
+
+# Insígnias 
+
 <p align="left">
 
 [![Sigueme !](https://img.shields.io/badge/Sígueme-%40medusin__corales-red)](https://www.instagram.com/medusin_corales/)
-[![Sigueme !](https://img.shields.io/badge/Sígueme-%40aosorio.13-blue)](https://instagram.com/aosorio.13?igshid=ZmVmZTY5ZGE=)[![Sigueme !](https://img.shields.io/badge/Sígueme-%40gg__misa__e1-yellow)](https://instagram.com/gg_misa_e1?igshid=ZmVmZTY5ZGE=)
+[![Sigueme !](https://img.shields.io/badge/Sígueme-%40aosorio.13-blue)](https://instagram.com/aosorio.13?igshid=ZmVmZTY5ZGE=)
+[![Sigueme !](https://img.shields.io/badge/Sígueme-%40gg__misa__e1-yellow)](https://instagram.com/gg_misa_e1?igshid=ZmVmZTY5ZGE=)
+[![License](https://img.shields.io/badge/License-no%20hay-green)] 
+[![ola](https://img.shields.io/badge/ola-%3AD-yellowgreen)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 </p>
 
 ![GitHub Org's stars](https://img.shields.io/github/stars/AbelAvendanoArgueta/Botecitos_El_Juego?style=social)
 
 ## Índice
 
-*[Insignias](#insignias)
+*[Insignias](#Insígnias)
 
-*[Descripción del proyecto](#Descripcion-del-proyecto)
+*[Descripción del proyecto](#Descripción-del-proyecto)
 
 *[Estado del proyecto](#Estado-del-proyecto)
 
-*[Acceso al proyecto](#acceso-proyecto)
+*[Formas de juego](#:hammer:Formas-de-juego)
 
-*[Tecnologías utilizadas](#tecnologías-utilizadas)
+*[Acceso al proyecto](#📁-Acceso-al-proyecto)
 
-*[Personas-Desarrolladores del Proyecto](#personas-desarrolladores)
+*[Abre y ejecuta el proyecto](#🛠️-Abre-y-ejecuta-el-proyecto)
+
+*[Tecnologías utilizadas](#:ok:Tecnologías-utilizadas)
+
+*[Licencia](#Licencia)
+
+*[Personas-Desarrolladores del Proyecto](#Autores)
 
 
 ## Descripción del proyecto
@@ -41,7 +52,7 @@ Anímate a jugar BOTECITOS the game y coloca tus naves muy estratégicamente par
 
 ¡Ni una sola flota estará a salvo en este increible e inmersivo juego de sigilo, suspenso y estrategia!, esto es BOTECITOS: "El Juego".
 
-
+### Estado del proyecto
 <h4 align="center">
 :construction: Proyecto en construcción :construction:
 </h4>
@@ -62,6 +73,25 @@ Ejecuar init.sh (si no tienes acceso a una terminal Bash, ejecuta program_init.p
 - Pygame
 - Bash
 - Microsoft Teams
+- Hamachi
+
+## Licencia
+
+```
+        DO WHAT YOU WANT IS PUBLIC LICENSE
+                    Version 1, November 2022
+
+Copyright (C) 2022 Group 3 because we are 3
+
+ Everyone can copy and distribute it word for word or modify it, 
+ if you copy this document without license you are allowed to change 
+ it as you want and name it as you want.
+
+            DO WHAT YOU WANT, PUBLIC LICENSE
+THE TERMS AND CONDITIONS OF COPYING, DISTRIBUTION AND MODIFICATION ARE 0.
+
+    you just DO WHAT YOU WANT.
+```
 
 ## Autores
 
