@@ -2,7 +2,7 @@ from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
 from src_parametros_generales import conexiones
 
-class Server:
+class Server_Host:
     def __init__(self):
         # Aqui inicializa la ejecucion de la clase cuando se le llama
         self.clientes = {}
@@ -51,14 +51,11 @@ class Server:
         for sock in self.clientes:
             sock.send(bytes(nombre + ",", "utf8") + mensaje)
 
-
 if __name__ == "__main__":
     host = ''
     puerto = conexiones['puerto']
     tamano_buffer = conexiones['buffer']
     dirección = (host, puerto)
-
     servidor = socket(AF_INET, SOCK_STREAM)
     servidor.bind(dirección)
-
-    server = Server()
+    server = Server_Host()

@@ -7,6 +7,8 @@ medidas = {
     'tamaño_letra_grande': 30,
     'ventana_ancho': 1280,
     'ventana_alto': 650,
+    'ventana_ancho_mini': 650,
+    'ventana_alto_mini': 650,
 }
 
 # Conexiones

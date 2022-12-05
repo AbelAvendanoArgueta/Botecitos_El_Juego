@@ -2,7 +2,7 @@ from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
 from src_parametros_generales import conexiones
 
-class Client:
+class Server_Client:
     def __init__(self, board):
         self.host = conexiones['host']
         self.puerto = conexiones['puerto']
@@ -37,10 +37,10 @@ class Client:
     def envio_paquetes(self, mensaje):
         # Maneja el envío de mensajes / paquetes
         print("envia {}".format(mensaje))
-        self.socketD_cliente.envio_paquetes(bytes(mensaje, "utf8"))
+        self.socketD_cliente.send(bytes(mensaje, "utf8"))
 
     def close(self):
-        self.envio_paquetes("EXIT")
+        self.envio_paquetes("Sale")
 
 if __name__ == "__main__":
-    client = Client()
+    client = Server_Client()
