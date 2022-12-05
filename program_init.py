@@ -5,7 +5,7 @@ from pygame.locals import *
 from recursos.codigo.src_boton import *
 from recursos.codigo.src_parametros_generales import *
 from recursos.codigo.src_pve_logic import *
-from recursos.codigo.src_pvp_logic import *
+# from recursos.codigo.src_pvp_logic import *
 
 pygame.init()
 # vt = Ventana inicial
@@ -127,39 +127,6 @@ def caratula():
         
         pygame.display.update()
 
-def ventana_pruebas():
-    while True:
-        vt.fill(naranja)
-        # Texto Pruebas
-        cur_pos = pygame.mouse.get_pos()
-        botecitos_txt = tomar_fuente(75).render("Pruebas", True, rojo)
-        botecitos_xy = botecitos_txt.get_rect(center=(640, 100))
-        vt.blit(botecitos_txt, botecitos_xy)
-
-        jtxt_retornar = Boton(image=None, pos=(140, 620), 
-                        text_input="retornar", font=tomar_fuente(30), base_color=blanco, hovering_color=rojo)
-        
-        #
-        
-        #
-
-        for button in [jtxt_retornar]:
-                button.changeColor(cur_pos)
-                button.update(vt)
-
-        jtxt_retornar.changeColor(cur_pos)
-        jtxt_retornar.update(vt)    
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if jtxt_retornar.checkForInput(cur_pos):
-                    main_menu()
-        
-        pygame.display.update()
-
 ### Funciones principales
 def iniciar_juego_pve(): 
     
@@ -179,24 +146,10 @@ def iniciar_juego_pve():
         pve_logic.llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab) # Disparar a los barcos enemigos
         continua_curso_juego = pve_logic.volver_a_jugar() # desea jugar otra vez?
 
-""" def iniciar_juego_pvp(): 
-    
+# def iniciar_juego_pvp(): 
     ## Esta funcion se llama en el momento que hacemos click 
     ## en el boton PVP e inicializa toda la logica del juego
-    continua_curso_juego = True
-
-    while continua_curso_juego:
-        ##### INTRO #### 
-        primer_tablero, pos_barcos_first_tab = pvp_logic.colocar_barcos()
-        segundo_tablero, pos_barcos_sec_tab = pvp_logic.pc_verfica_barcos(longitud_barcos)
-        print()
-        pvp_logic.imprimir_tablero(primer_tablero)
-        print(pos_barcos_first_tab)
-        pvp_logic.imprimir_tablero(segundo_tablero)
-        print(pos_barcos_sec_tab)
-        pvp_logic.llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab) # Disparar a los barcos enemigos
-        continua_curso_juego = pvp_logic.volver_a_jugar() # desea jugar otra vez?
-        """
+    
 
 if __name__ == "__main__": 
     # Cuando ejecutamos el programa

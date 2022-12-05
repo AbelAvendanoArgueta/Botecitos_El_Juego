@@ -59,3 +59,69 @@ class Barcos:
             self._set_colour(blanco)
         elif self.estadoD_barco == "colocado":
             self._set_colour(gris_claro)
+
+    def verificar_limites(self, inicio, fin):
+        if (inicio[0] < 0 or inicio[0] > 9
+                or inicio[1] < 1 or inicio[1] > 10
+                or fin[0] < 0 or fin[0] > 9
+                or fin[1] < 1 or fin[1] > 10):
+            return False
+        else:
+            return True
+
+    def se_puede_colocar(self, barcos):
+        for barco in barcos.values():
+            if barco.toma_estadoD_barco() == "colocado":
+                for pocision in self.toma_formacion():
+                    if pocision in barco.toma_formacion():
+                        return True
+        return False
+
+    def toma_tamano(self):
+        return self.tamano
+
+    def establece_color(self, color):
+        self._color = color
+
+    def toma_formacion(self):
+        return self.array
+
+    def toma_estadoD_barco(self):
+        return self.estadoD_barco
+
+    def __toma_objeto__(self, item):
+        return self.array[item]
+
+
+class Tablero:
+    # Clase que representa el tablero del jugador. Contiene naves y conjeturas de jugadores y oponentes.
+    def __init__(self, pantalla, font):
+        self.fase = "Colocación"  # Puede ser colocación, espera, Turno del jugador, Turno del Oponente, final
+        self._pantalla_ventana = pantalla
+        self._font = font
+        self._pantalla_texto = [self._render_text("Fase de colocación")]
+        self._barcos_jugador = {'1': Barcos((0, 1), (4, 1), blanco),
+                              '2': Barcos((0, 1), (3, 1), negro),}
+                              #'3': Barcos((0, 1), (2, 0), negro),
+                              #'4':Barcos((0, 1), (1, 0), negro),
+                              #'5':Barcos((0, 1), (1, 0), negro),
+                              #  }
+        self.cantidadD_barcos_disp = len(self._barcos_jugador)
+        self._cantidad_de_intentos_validos = {}
+        self._intentos_del_oponente = self.inicializacionD_diccionarios()
+        self._intentos_del_jugador = self.inicializacionD_diccionarios()
+        self._barcosD_oponente = {}
+        self._ultimo_intento = None
+        self._nombreD_jugador = None
+        self._juego_listoP_empezar = False
+        self._numero_de_hundidos = 0
+
+    # Initialisation functions
+
+    def inicializacionD_diccionarios(self):
+        # Crea diccionario de listas vacías para cada barco, así como fallas.
+        intentos_realizados = {}
+        for idx in self._barcos_jugador:
+            intentos_realizados[idx] = []
+        intentos_realizados["Falla_Intento"] = []
+        return intentos_realizados

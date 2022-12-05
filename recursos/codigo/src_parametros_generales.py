@@ -17,7 +17,7 @@ medidas = {
 # otro numerados del 0 al 65535
 conexiones = {
     "host": "127.0.0.1",
-    "puerto": 33000, 
+    "puerto": 33001, 
     "buffer": 1024,
 }
 
