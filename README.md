@@ -25,7 +25,7 @@
 
 *[Estado del proyecto](#Estado-del-proyecto)
 
-*[Formas de juego](#:hammer:Formas-de-juego)
+*[Formas de juego](#___)
 
 *[Acceso al proyecto](#__)
 
@@ -56,8 +56,7 @@ Anímate a jugar BOTECITOS the game y coloca tus naves muy estratégicamente par
 <h4 align="center">
 :construction: Proyecto en construcción :construction:
 </h4>
-
-
+# ___
 ## :hammer:Formas de juego
 - `PVE`: El método de juego singleplayer PVE o Player versus Enviroment (Jugador contra Entorno), en el que si no cuentas con ningun amigo o vida social alguna, puedes jugar solo contra una máquina programada.
 - `PVP`: El método de juego multiplayer PVP o Player Versus Player (Jugador contra jugador), en el que juegas con tus amigos :D.
@@ -81,16 +80,16 @@ Ejecuar init.sh (si no tienes acceso a una terminal Bash, ejecuta program_init.p
         DO WHAT YOU WANT IS PUBLIC LICENSE
             Version 1, November 2022
 
-Copyright (C) 2022 Group 3 because we are 3
+   Copyright (C) 2022 Grupo 3 porque somos 3
 
     Everyone can copy and distribute it word for word 
-or modify it, if you copy this document without 
-license you are allowed to change it as you want and 
-name it as you want.
+or modify it, if you copy this document without license 
+you are allowed to change it as you want and name it 
+as you want.
 
         DO WHAT YOU WANT, PUBLIC LICENSE
 THE TERMS AND CONDITIONS OF COPYING, DISTRIBUTION AND 
-   MODIFICATION ARE 0.
+  MODIFICATION ARE 0.
 
     you just DO WHAT YOU WANT.
 ```
