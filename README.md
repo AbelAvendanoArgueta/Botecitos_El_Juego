@@ -11,7 +11,7 @@
 [![Sigueme !](https://img.shields.io/badge/Sígueme-%40medusin__corales-red)](https://www.instagram.com/medusin_corales/)
 [![Sigueme !](https://img.shields.io/badge/Sígueme-%40aosorio.13-blue)](https://instagram.com/aosorio.13?igshid=ZmVmZTY5ZGE=)
 [![Sigueme !](https://img.shields.io/badge/Sígueme-%40gg__misa__e1-yellow)](https://instagram.com/gg_misa_e1?igshid=ZmVmZTY5ZGE=)
-[![ License](https://img.shields.io/badge/License-no%20hay-green)]
+![ License](https://img.shields.io/badge/License-no%20hay-green)
 [![ola](https://img.shields.io/badge/ola-%3AD-yellowgreen)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 </p>
 
@@ -27,11 +27,11 @@
 
 *[Formas de juego](#:hammer:Formas-de-juego)
 
-*[Acceso al proyecto](# )
+*[Acceso al proyecto](#__)
 
-*[Abre y ejecuta el proyecto](# )
+*[Abre y ejecuta el proyecto](#__)
 
-*[Tecnologías utilizadas](#   )
+*[Tecnologías utilizadas](#_)
 
 *[Licencia](#Licencia)
 
@@ -61,13 +61,13 @@ Anímate a jugar BOTECITOS the game y coloca tus naves muy estratégicamente par
 ## :hammer:Formas de juego
 - `PVE`: El método de juego singleplayer PVE o Player versus Enviroment (Jugador contra Entorno), en el que si no cuentas con ningun amigo o vida social alguna, puedes jugar solo contra una máquina programada.
 - `PVP`: El método de juego multiplayer PVP o Player Versus Player (Jugador contra jugador), en el que juegas con tus amigos :D.
-# 
+# __
 ## 📁 Acceso al proyecto
 Descarga el proyecto
 
 ## 🛠️ Abre y ejecuta el proyecto
 Ejecuar init.sh (si no tienes acceso a una terminal Bash, ejecuta program_init.py)
-#   
+# _
 # :ok:Tecnologías utilizadas
 - Python
 - Pygame
@@ -83,12 +83,14 @@ Ejecuar init.sh (si no tienes acceso a una terminal Bash, ejecuta program_init.p
 
 Copyright (C) 2022 Group 3 because we are 3
 
-    Everyone can copy and distribute it word for word or modify it, 
-if you copy this document without license you are allowed to change 
-it as you want and name it as you want.
+    Everyone can copy and distribute it word for word 
+or modify it, if you copy this document without 
+license you are allowed to change it as you want and 
+name it as you want.
 
         DO WHAT YOU WANT, PUBLIC LICENSE
-THE TERMS AND CONDITIONS OF COPYING, DISTRIBUTION AND MODIFICATION ARE 0.
+THE TERMS AND CONDITIONS OF COPYING, DISTRIBUTION AND 
+   MODIFICATION ARE 0.
 
     you just DO WHAT YOU WANT.
 ```
