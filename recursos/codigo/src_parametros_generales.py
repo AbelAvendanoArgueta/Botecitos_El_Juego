@@ -18,7 +18,7 @@ medidas = {
 conexiones = {
     "host": "127.0.0.1",
     "puerto": 33001, 
-    "buffer": 1024,
+    "buffer": 1024, # 
 }
 
 # colores

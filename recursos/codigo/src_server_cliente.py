@@ -28,7 +28,7 @@ class Server_Client:
                 mensaje = self.socketD_cliente.recv(self.tamano_buffer).decode("utf8")
                 mensaje = mensaje.split(',')
                 print("recibió {}".format(mensaje))
-                respuesta = self.board.process_message(mensaje)
+                respuesta = self.board.intercambioD_mensajes(mensaje)
                 if respuesta:
                     self.envio_paquetes(respuesta)
             except OSError:
