@@ -5,10 +5,10 @@ medidas = {
     'margen': 100, # Debe ser mayor que LADO_CUADRADO
     'tamaño_letra': 15,
     'tamaño_letra_grande': 30,
-    'ventana_ancho': 1280,
-    'ventana_alto': 650,
-    'ventana_ancho_mini': 650,
-    'ventana_alto_mini': 650,
+    'ventana_ancho': 770,
+    'ventana_alto': 550,
+    'ventana_ancho_mini': 575,
+    'ventana_alto_mini': 575,
 }
 
 # Conexiones
@@ -40,11 +40,11 @@ velocidad_texto = 100
 
 # Parametros de juego
 letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-longitud_barcos = [1]
+longitud_barcos = [1, 3, 3, 5]
     # Esta variable nos permite facilmente cambiar
     # la forma en la que trabaja la funcion
     # opc_disp_barcos_dejugador()
-cuadros_perLado = 2 # no puede ser menor a 2
+cuadros_perLado = 8 # no puede ser menor a 2
     # cuadros por lado define el tamaño
     # del tablero por medio de la cuadricula
     # por lado 

@@ -1,6 +1,6 @@
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
-from src_parametros_generales import conexiones
+from recursos.codigo.src_parametros_generales import conexiones
 
 class Server_Client:
     def __init__(self, board):

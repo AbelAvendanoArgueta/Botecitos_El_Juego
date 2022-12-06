@@ -1,8 +1,8 @@
 import time
 import pygame
 import pygame.freetype
-from src_server_cliente import Server_Client
-from src_parametros_generales import *
+from recursos.codigo.src_server_cliente import Server_Client
+from recursos.codigo.src_parametros_generales import *
 
 # Importacion de Fuente
 def tomar_fuente(fuente_T): # fuente_T = Tamaño de la fuente 
@@ -367,14 +367,15 @@ class Tablero:
             self.definir_fase_actual("Esperando")
         self._juego_listoP_empezar = True
 
-    def _end_game(self, nombre=None):
+    def finaliza_juego(self, nombre=None):
         if nombre:
             self.definir_fase_actual("menu")
             print("Jugador {} ha ganado el juego".format(nombre))
 
 
 def draw_menu(surface, font, title_font):
-    surface.fill(gris)
+    fdpi = pygame.image.load(imagen_mar)
+    surface.blit(fdpi, (0, 0))
     pygame.draw.rect(surface, blanco,
                      pygame.Rect((medidas['ventana_ancho_mini'] / 2) - (medidas['ventana_ancho_mini'] / 6),
                                  (medidas['ventana_alto_mini'] * 11 / 10 / 2) - (medidas['ventana_alto_mini'] / 10),
@@ -383,19 +384,16 @@ def draw_menu(surface, font, title_font):
     superficieD_texto, rect = font.render("Conectar a Host", negro)
     surface.blit(superficieD_texto,
                  ((medidas['ventana_ancho_mini'] / 2) - (rect.width / 2), (medidas['ventana_alto_mini'] * 11 / 10 / 2) - (rect.height / 2)))
-    superficieD_texto, rect = title_font.render("Botecitos 'El juego'", blanco)
+    superficieD_texto, rect = title_font.render("", blanco)
     surface.blit(superficieD_texto,
                  ((medidas['ventana_ancho_mini'] / 2) - (rect.width / 2), (medidas['ventana_alto_mini'] / 4) - (rect.height / 2)))
 
-
-
-if __name__ == "__main__":
+def llamada_de_funciones_pvp():
     FPS = 30
     pygame.init()
     pantalla = pygame.display.set_mode((medidas['ventana_ancho_mini'], int(medidas['ventana_alto_mini'] * 11 / 10)))
     font = pygame.freetype.SysFont("Courier", 24)
     title_font = pygame.freetype.SysFont("Courier", 36)
-    pygame.display.set_caption("Botecitos 'El juego'")
     en_ejecucion = True
     tablero = None
     Servidor_cliente = None

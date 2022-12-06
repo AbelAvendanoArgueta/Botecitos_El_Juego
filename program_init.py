@@ -10,7 +10,7 @@ from pygame.locals import *
 from recursos.codigo.src_boton import *
 from recursos.codigo.src_parametros_generales import *
 from recursos.codigo.src_pve_logic import *
-# from recursos.codigo.src_pvp_logic import *
+from recursos.codigo.src_pvp_logic import *
 
 #*--Inicio programa--*
 pygame.init()
@@ -73,7 +73,7 @@ def main_menu():
 #funcion de boton jugar
 def boton_jugar():
     while True: # Se define ciclica la siguiente parte del codigo
-        vt = pygame.display.set_mode((medidas['ventana_ancho'], medidas['ventana_alto'])) #abre nueva ventana con los parametros establecidos para pantalla jugar
+        vt = pygame.display.set_mode((1280,650)) #abre nueva ventana con los parametros establecidos para pantalla jugar
         cur_pos = pygame.mouse.get_pos() #posicion de cursor 
         fdpmdj = pygame.image.load(imagen_modo_juego) #carga imagen de fondo
         vt.blit(fdpmdj, (0, 0))
@@ -111,8 +111,8 @@ def boton_jugar():
                 if btn_jugar_pve.checkForInput(cur_pos):
                     boton_jugar_pve() #redireccion a pve
                     iniciar_juego_pve() #redireccion a pvp
-                # if btn_jugar_pvp.checkForInput(cur_pos):
-                    # iniciar_juego_pvp()
+                if btn_jugar_pvp.checkForInput(cur_pos):
+                    iniciar_juego_pvp()
      
         #actualiza pantalla
         pygame.display.update()
@@ -167,11 +167,11 @@ def iniciar_juego_pve():
         pve_logic.llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab) # Disparar a los barcos enemigos
         continua_curso_juego = pve_logic.volver_a_jugar() # desea jugar otra vez?
 
-# def iniciar_juego_pvp(): 
+def iniciar_juego_pvp(): 
     ## Esta funcion se llama en el momento que hacemos click 
     ## en el boton PVP e inicializa toda la logica del juego
+    llamada_de_funciones_pvp()
     
-
 if __name__ == "__main__": 
     # Cuando ejecutamos el programa
     # esta es la primera funcion que se llama
