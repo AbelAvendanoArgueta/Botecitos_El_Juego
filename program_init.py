@@ -73,7 +73,7 @@ def main_menu():
 #funcion de boton jugar
 def boton_jugar():
     while True: # Se define ciclica la siguiente parte del codigo
-        vt = pygame.display.set_mode((1280,650)) #abre nueva ventana con los parametros establecidos para pantalla jugar
+        vt = pygame.display.set_mode((medidas['ventana_ancho'], medidas['ventana_alto'])) #abre nueva ventana con los parametros establecidos para pantalla jugar
         cur_pos = pygame.mouse.get_pos() #posicion de cursor 
         fdpmdj = pygame.image.load(imagen_modo_juego) #carga imagen de fondo
         vt.blit(fdpmdj, (0, 0))

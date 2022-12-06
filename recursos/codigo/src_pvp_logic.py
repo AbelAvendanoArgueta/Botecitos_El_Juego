@@ -270,7 +270,7 @@ class Tablero:
                 pygame.draw.circle(self._pantalla_ventana, color,
                                    (int((turno[0] + 0.5) * medidas['ventana_ancho_mini'] / 10),
                                     int((turno[1] + 0.5) * medidas['ventana_alto_mini'] / 10)),
-                                   medidas['ventana_ancho_mini'] // 40)
+                                   medidas['ventana_ancho_mini'] // 20)
 
     def dibuja_estado_actualD_barcos(self):
         barcos = self.toma_barcosActualizados()

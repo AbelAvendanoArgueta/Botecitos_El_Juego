@@ -1,14 +1,14 @@
 # Configuracion de pantalla y tableros
 medidas = {
-    'lado_cuadrado': 30,
-    'separacion': 100,
-    'margen': 100, # Debe ser mayor que LADO_CUADRADO
+    'lado_cuadrado': 50,
+    'separacion': 75,
+    'margen': 65, # Debe ser mayor que LADO_CUADRADO
     'tamaño_letra': 15,
     'tamaño_letra_grande': 30,
-    'ventana_ancho': 770,
-    'ventana_alto': 550,
-    'ventana_ancho_mini': 575,
-    'ventana_alto_mini': 575,
+    'ventana_ancho': 1280,
+    'ventana_alto': 650,
+    'ventana_ancho_mini': 500,
+    'ventana_alto_mini': 500,
 }
 
 # Conexiones
