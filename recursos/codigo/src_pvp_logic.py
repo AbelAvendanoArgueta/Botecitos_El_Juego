@@ -60,9 +60,9 @@ class Barcos:
         if self.estadoD_barco == "no colocado":
             self.establece_color(negro)
         elif self.estadoD_barco == "en movimiento":
-            self.establece_color(blanco)
+            self.establece_color(azul)
         elif self.estadoD_barco == "colocado":
-            self.establece_color(gris_claro)
+            self.establece_color(verde)
 
     def verificar_limites(self, inicio, fin):
         if (inicio[0] < 0 or inicio[0] > 9
@@ -104,7 +104,7 @@ class Tablero:
         self._pantalla_ventana = pantalla
         self._font = font
         self._pantalla_texto = [self.renderizacionD_texto("Fase de colocación")]
-        self._barcos_jugador = {'1': Barcos((0, 1), (4, 1), blanco),
+        self._barcos_jugador = {'1': Barcos((0, 1), (4, 1), gris),
                               '2': Barcos((0, 1), (3, 1), negro),}
                               #'3': Barcos((0, 1), (2, 0), negro),
                               #'4':Barcos((0, 1), (1, 0), negro),
@@ -140,12 +140,12 @@ class Tablero:
     # Funciones para definir parametros de ventana y tablero
     def dibuja_tableros(self):
         # Dibuja el tablero a la superficie de pygame.
-        self._pantalla_ventana.fill(gris)
+        self._pantalla_ventana.fill(blanco)
         for x in range(1, 11):
-            pygame.draw.line(self._pantalla_ventana, gris_claro,
+            pygame.draw.line(self._pantalla_ventana, negro,
                              (medidas['ventana_ancho_mini'] * x / 10, medidas['ventana_alto_mini'] / 10),
                              (medidas['ventana_ancho_mini'] * x / 10, medidas['ventana_alto_mini'] + medidas['ventana_alto_mini'] / 10), 1)
-            pygame.draw.line(self._pantalla_ventana, gris_claro,
+            pygame.draw.line(self._pantalla_ventana, negro,
                              (0, medidas['ventana_alto_mini'] * x / 10),
                              (medidas['ventana_ancho_mini'], medidas['ventana_alto_mini'] * x / 10), 1)
 
@@ -154,7 +154,7 @@ class Tablero:
             if self.tomar_fase() != "Colocación":
                 self.dibuja_disparos_realizados()
         elif self.tomar_fase() == "Termina":
-            pygame.draw.rect(self._pantalla_ventana, blanco,
+            pygame.draw.rect(self._pantalla_ventana, gris,
                              pygame.Rect((medidas['ventana_ancho_mini'] / 2) - (medidas['ventana_ancho_mini'] / 4),
                                          (medidas['ventana_alto_mini'] * 11 / 10 / 2) - (medidas['ventana_alto_mini'] / 10),
                                          medidas['ventana_ancho_mini'] / 2,
@@ -277,7 +277,7 @@ class Tablero:
         for barco in barcos.values():
             barco.dibujo_barco_opc(self._pantalla_ventana)
 
-    def renderizacionD_texto(self, text, x=medidas['ventana_ancho_mini'] / 2, y=medidas['ventana_alto_mini'] / 20, color=blanco):
+    def renderizacionD_texto(self, text, x=medidas['ventana_ancho_mini'] / 2, y=medidas['ventana_alto_mini'] / 20, color=naranja):
         superficieD_texto, rect = self._font.render(text, color)
         return [superficieD_texto, x - (rect.width / 2), y - (rect.height / 2)]
 
@@ -336,7 +336,7 @@ class Tablero:
                 barco_hundido = intentos_realizados[mensaje[1]]
                 coords = [i[0] + i[1] for i in barco_hundido]
                 inicio, fin = coords.index(min(coords)), coords.index(max(coords))
-                barcos[mensaje[1]] = Barcos(barco_hundido[inicio], barco_hundido[fin], blanco)
+                barcos[mensaje[1]] = Barcos(barco_hundido[inicio], barco_hundido[fin], gris)
                 if nombre != self._nombreD_jugador:
                     self._numero_de_hundidos += 1
                     if self._numero_de_hundidos == self.cantidadD_barcos_disp:
@@ -376,15 +376,15 @@ class Tablero:
 def draw_menu(surface, font, title_font):
     fdpi = pygame.image.load(imagen_mar)
     surface.blit(fdpi, (0, 0))
-    pygame.draw.rect(surface, blanco,
+    pygame.draw.rect(surface, gris_claro,
                      pygame.Rect((medidas['ventana_ancho_mini'] / 2) - (medidas['ventana_ancho_mini'] / 6),
                                  (medidas['ventana_alto_mini'] * 11 / 10 / 2) - (medidas['ventana_alto_mini'] / 10),
                                  medidas['ventana_ancho_mini'] / 3,
                                  medidas['ventana_alto_mini'] / 5))
-    superficieD_texto, rect = font.render("Conectar a Host", negro)
+    superficieD_texto, rect = font.render("Conectar", amarillo)
     surface.blit(superficieD_texto,
                  ((medidas['ventana_ancho_mini'] / 2) - (rect.width / 2), (medidas['ventana_alto_mini'] * 11 / 10 / 2) - (rect.height / 2)))
-    superficieD_texto, rect = title_font.render("", blanco)
+    superficieD_texto, rect = title_font.render("", naranja)
     surface.blit(superficieD_texto,
                  ((medidas['ventana_ancho_mini'] / 2) - (rect.width / 2), (medidas['ventana_alto_mini'] / 4) - (rect.height / 2)))
 
@@ -392,8 +392,8 @@ def llamada_de_funciones_pvp():
     FPS = 30
     pygame.init()
     pantalla = pygame.display.set_mode((medidas['ventana_ancho_mini'], int(medidas['ventana_alto_mini'] * 11 / 10)))
-    font = pygame.freetype.SysFont("Courier", 24)
-    title_font = pygame.freetype.SysFont("Courier", 36)
+    font = pygame.freetype.SysFont(import_fuente, 24)
+    title_font = pygame.freetype.SysFont(import_fuente, 36)
     en_ejecucion = True
     tablero = None
     Servidor_cliente = None

@@ -149,23 +149,12 @@ def caratula():
         pygame.display.update()
 
 ### Funciones principales
-def iniciar_juego_pve(): 
-    
+# Para inicializar la modalidad de juego requerida
+def iniciar_juego_pve():
     ## Esta funcion se llama en el momento que hacemos click 
     ## en el boton PVE e inicializa toda la logica del juego
-    continua_curso_juego = True
+    llamada_de_funciones_pve()
 
-    while continua_curso_juego:
-        ##### INTRO #### 
-        primer_tablero, pos_barcos_first_tab = pve_logic.colocar_barcos()
-        segundo_tablero, pos_barcos_sec_tab = pve_logic.pc_verfica_barcos(longitud_barcos)
-        print()
-        pve_logic.imprimir_tablero(primer_tablero)
-        print(pos_barcos_first_tab)
-        pve_logic.imprimir_tablero(segundo_tablero)
-        print(pos_barcos_sec_tab)
-        pve_logic.llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab) # Disparar a los barcos enemigos
-        continua_curso_juego = pve_logic.volver_a_jugar() # desea jugar otra vez?
 
 def iniciar_juego_pvp(): 
     ## Esta funcion se llama en el momento que hacemos click 

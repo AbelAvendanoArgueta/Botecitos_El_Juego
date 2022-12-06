@@ -633,3 +633,20 @@ class pve_logic():
             return True
         elif tecla == pygame.K_ESCAPE:
             return False
+
+def llamada_de_funciones_pve():
+    # Se define ciclo que matendra la ventana llevando
+    # su curso normal durante el juego
+    continua_curso_juego = True
+
+    while continua_curso_juego:
+        ##### INTRO #### 
+        primer_tablero, pos_barcos_first_tab = pve_logic.colocar_barcos()
+        segundo_tablero, pos_barcos_sec_tab = pve_logic.pc_verfica_barcos(longitud_barcos)
+        print()
+        pve_logic.imprimir_tablero(primer_tablero)
+        print(pos_barcos_first_tab)
+        pve_logic.imprimir_tablero(segundo_tablero)
+        print(pos_barcos_sec_tab)
+        pve_logic.llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab) # Disparar a los barcos enemigos
+        continua_curso_juego = pve_logic.volver_a_jugar() # desea jugar otra vez?
