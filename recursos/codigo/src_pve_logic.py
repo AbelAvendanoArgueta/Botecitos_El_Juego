@@ -74,7 +74,7 @@ class pve_logic():
                             pve_logic.dibuja_tableros(primer_tablero, segundo_tablero)
                             continua_curso_juego = False
                     else:
-                        pve_logic.texto_jugador('??')
+                        print('??')
                         pve_logic.alerta(texto_coordenadas_erroneas)
 
     ### Dibujo, trazado y analisis de tableros

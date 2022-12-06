@@ -125,3 +125,78 @@ class Tablero:
             intentos_realizados[idx] = []
         intentos_realizados["Falla_Intento"] = []
         return intentos_realizados
+
+
+    def inicializacionD_diccs_Coordenadas(self):
+        # Crea diccionario de todas las coordenadas ocupadas por un mosaico de barco
+        var_coordenadas = {}
+        for idx, barco in self._barcos_jugador.items():
+            var_coordenadas[idx] = barco.toma_formacion()
+        return var_coordenadas
+
+    # Funciones para definir parametros de ventana y tablero
+    def dibuja_tableros(self):
+        # Dibuja el tablero a la superficie de pygame.
+        self._pantalla_ventana.fill(gris)
+        for x in range(1, 11):
+            pygame.draw.line(self._pantalla_ventana, gris_claro,
+                             (medidas['ventana_ancho_mini'] * x / 10, medidas['ventana_alto_mini'] / 10),
+                             (medidas['ventana_ancho_mini'] * x / 10, medidas['ventana_alto_mini'] + medidas['ventana_alto_mini'] / 10), 1)
+            pygame.draw.line(self._pantalla_ventana, gris_claro,
+                             (0, medidas['ventana_alto_mini'] * x / 10),
+                             (medidas['ventana_ancho_mini'], medidas['ventana_alto_mini'] * x / 10), 1)
+
+        if self.tomar_fase() not in ["Termina", "Esperando"]:
+            self._draw_ships()
+            if self.tomar_fase() != "Colocación":
+                self._draw_guesses()
+        elif self.tomar_fase() == "Termina":
+            pygame.draw.rect(self._pantalla_ventana, blanco,
+                             pygame.Rect((medidas['ventana_ancho_mini'] / 2) - (medidas['ventana_ancho_mini'] / 4),
+                                         (medidas['ventana_alto_mini'] * 11 / 10 / 2) - (medidas['ventana_alto_mini'] / 10),
+                                         medidas['ventana_ancho_mini'] / 2,
+                                         medidas['ventana_alto_mini'] / 5))
+
+        for objetoD_texto in self._pantalla_texto:
+            self._pantalla_ventana.blit(objetoD_texto[0], (objetoD_texto[1], objetoD_texto[2]))
+
+    def tomar_fase(self):
+        return self.fase
+
+    def definir_fase_actual(self, fase, name=None):
+        self.fase = fase
+        self._update_text(name)
+
+    def validacionD_turno(self, turno):
+        # Comprueba si ya el usuario cliente actual ha realizado un intento/turno
+        for barco in self._get_guesses().values():
+            if turno in barco:
+                return False
+        self._ultimo_intento = turno
+        return True
+
+    # Colocamiento de barcos
+
+    def mover_barco(self, barco_index, key):
+        # Mueve el barco en/por el tablero segun la entrada del usuario
+        # a travez de las teclas arriba, abajo, derecha e izquierda
+        if key == pygame.K_r:
+            self._barcos_jugador[barco_index].rotacion_barco()
+        if key == pygame.K_UP:
+            self._barcos_jugador[barco_index].traduccion_barcosIn_tab((0, -1))
+        if key == pygame.K_DOWN:
+            self._barcos_jugador[barco_index].traduccion_barcosIn_tab((0, 1))
+        if key == pygame.K_LEFT:
+            self._barcos_jugador[barco_index].traduccion_barcosIn_tab((-1, 0))
+        if key == pygame.K_RIGHT:
+            self._barcos_jugador[barco_index].traduccion_barcosIn_tab((1, 0))
+
+    def colocar_barco(self, barco_index):
+        # Intentos de confirmar la posición de una pieza en fase de colocación. 
+        # Comprueba si hay colisiones primero o si un barco esta cruzado con otro
+        if not self._barcos_jugador[str(barco_index)].se_puede_colocar(self._barcos_jugador):
+            self._barcos_jugador[str(barco_index)].proveer_estadoTo_barco("colocado")
+            if barco_index < 2:
+                self._barcos_jugador[str(barco_index + 1)].proveer_estadoTo_barco("en movimiento")
+            return True
+        return False
