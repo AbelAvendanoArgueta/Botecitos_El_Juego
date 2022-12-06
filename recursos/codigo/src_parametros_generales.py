@@ -59,17 +59,14 @@ imagen_caratula = "./recursos/imagenes/caratula.png"
 imagen_mar = "./recursos/imagenes/fondo_mar.png"
 
 # Alertas
-texto_longitud_barco='un barco de longitud'
-texto_configurar='Pulsa F10 para configurar idioma y resolución de pantalla'
-texto_continuar = '\nPulsa ENTER para continuar'
 texto_alerta_fuera='No puedes sacar un barco del tablero'
 texto_alerta_barcos_juntos = 'No se puede colocar un barco al lado de otro'
 texto_coordenadas_erroneas = 'Tienes que escribir una letra seguida de un número'
 texto_alerta_sin_terminar = 'No has terminado de colocar los barcos'
 texto_alerta_hundido = 'Barco hundido'
-texto_has_perdido = '¡Has perdido la batalla esperamos qué otros tengan más suerte qué tú!'
 título = 'Botecitos el juego'
 texto_volver_a_jugar = '''Pulsa Enter para volver a jugar,
+
 Escape para salir
 
 '''

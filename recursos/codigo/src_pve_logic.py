@@ -18,7 +18,6 @@ class pve_logic():
     def llamada_de_funciones(primer_tablero, segundo_tablero, pos_barcos_first_tab, pos_barcos_sec_tab):
         # se llaman funcionar principales para definir tableros y barcos
         boton_jugar_pve()
-        pve_logic.alerta('')
         teclas = []
         continua_curso_juego = True
 
@@ -53,7 +52,7 @@ class pve_logic():
                         pve_logic.imprimir_tablero(primer_tablero)
                         print()
                         pve_logic.imprimir_tablero(segundo_tablero)
-                        pve_logic.texto_jugador(coordenadas)
+                        print(coordenadas)
                         pve_logic.comprueba_unidad_destruida(segundo_tablero, pos_barcos_sec_tab, x, y)
                         segundo_tablero = pve_logic.ejecucion_Ddisparo(segundo_tablero, x, y)
 
@@ -65,7 +64,7 @@ class pve_logic():
                         pve_logic.dibuja_tableros(primer_tablero, segundo_tablero)
                         sleep(1)
                         x,y = pve_logic.ataque_pc_nivel_2(pve_logic.oculta_posde_barcos(primer_tablero))
-                        pve_logic.texto_ordenador(pve_logic.traducir_coordenadas_al_reves(x,y))
+                        print(pve_logic.traducir_coordenadas_al_reves(x,y))
                         pve_logic.comprueba_unidad_destruida(primer_tablero, pos_barcos_first_tab, x, y)
                         primer_tablero = pve_logic.ejecucion_Ddisparo(primer_tablero, x, y)
                         if pve_logic.ha_terminado(primer_tablero):
@@ -75,7 +74,7 @@ class pve_logic():
                             continua_curso_juego = False
                     else:
                         print('??')
-                        pve_logic.alerta(texto_coordenadas_erroneas)
+                        print(texto_coordenadas_erroneas)
 
     ### Dibujo, trazado y analisis de tableros
     def atravezar_tablero(tablero_de_juego):
@@ -326,7 +325,7 @@ class pve_logic():
                         y = y_ultima
                         if x<cuadros_perLado and tablero_de_juego[x][y] == ' ':
                             tablero_de_juego[x][y] = '.'
-                    pve_logic.alerta(texto_alerta_hundido)
+                    print(texto_alerta_hundido)
                     return True
 
     ### Trazado de barcos
@@ -377,23 +376,23 @@ class pve_logic():
         # esten ocupadas y que podamos colocar el barco sin traslparlo
         # con otro barco
         if (vertical and fila+largo>cuadros_perLado):
-            pve_logic.alerta(texto_alerta_fuera)
+            print(texto_alerta_fuera)
             return False
         if (not vertical and columna+largo>cuadros_perLado):
-            pve_logic.alerta(texto_alerta_fuera)
+            print(texto_alerta_fuera)
             return False
         if vertical:
             for y in range(max(0,fila-1), min(fila+largo+1, cuadros_perLado)):
                 for x in range(max(0,columna-1), min(columna + 2, cuadros_perLado)):
                     if tablero_de_juego[x][y]=='B':
-                        pve_logic.alerta(texto_alerta_barcos_juntos)
+                        print(texto_alerta_barcos_juntos)
                         return False
         else:
         # con este condificonal limitamos entre los distintos barcos
             for y in range(max(0,fila-1), min(fila+2, cuadros_perLado)):
                 for x in range(max(0,columna-1), min(columna + largo+1, cuadros_perLado)):
                     if tablero_de_juego[x][y]=='B':
-                        pve_logic.alerta(texto_alerta_barcos_juntos)
+                        print(texto_alerta_barcos_juntos)
                         return False
         return True
 
@@ -538,7 +537,7 @@ class pve_logic():
                     exit()
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                     if sum(barcos_colocados)<num_barcos:
-                        pve_logic.alerta(texto_alerta_sin_terminar)
+                        print(texto_alerta_sin_terminar)
                     else:
                         seguir_colocando = False
                 elif event.type == pygame.MOUSEMOTION:
@@ -572,7 +571,6 @@ class pve_logic():
                             for columna, fila in posiciones_barcos[barco_seleccionado]:
                                 primer_tablero[columna][fila] = ' '
                             barcos_colocados[barco_seleccionado] = False
-        pve_logic.alerta('')
         return primer_tablero, posiciones_barcos
 
     def ha_terminado(tablero_de_juego):
@@ -603,23 +601,8 @@ class pve_logic():
 
     def dibuja_texto_largo(texto, x, y, font, fontsize):
         lineas = texto.splitlines()
-        pygame.draw.rect(vt, blanco,
-                        (x, y, medidas['ventana_ancho'] - x, fontsize*len(lineas)))
         for i, l in enumerate(lineas):
             vt.blit(font.render(l, True, negro), (x, y + fontsize*i))
-
-    ### Llamada de alertas
-    tiempo_ultima_alerta = pygame.time.get_ticks()
-    texto_alerta = ''
-
-    def alerta(texto):
-        # Funcion para lanzar alertas segun parametro
-        # pasado a travez de variable 'texto'
-        # normamente los texto que imprimiran las alertas
-        # estan ubicadas  en archivo de parametros generales
-        global texto_alerta, tiempo_ultima_alerta
-        tiempo_ultima_alerta = pygame.time.get_ticks()
-        texto_alerta = texto
 
     def pantalla_texto(texto_total):
         boton_jugar_pve()

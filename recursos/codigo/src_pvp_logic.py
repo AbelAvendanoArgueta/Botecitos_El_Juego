@@ -315,3 +315,134 @@ class Tablero:
                 if len(self._intentos_del_oponente[index]) + 1 == len(barco):
                     respuesta = "Respuesta_Reconocida,Hundir,{}".format(index)
         return respuesta
+
+    def procesaSi_respuesta(self, nombre, mensaje):
+        # Recibe respuesta del servidor/host.
+        # Actualiza los aciertos y errores del estado del juego y cambio de turno.
+        # Puede tratarse como Disparo, Fallo o Hundimiento del barco enemigo.
+        respuesta = None
+        if nombre == self._nombreD_jugador:
+            intentos_realizados = self._intentos_del_oponente
+            barcos = self._barcos_jugador
+        else:
+            intentos_realizados = self._intentos_del_jugador
+            barcos = self._barcosD_oponente
+
+        if mensaje[0] == "Falla":
+            intentos_realizados["Falla_Intento"].append(self._ultimo_intento)
+        else:
+            intentos_realizados[mensaje[1]].append(self._ultimo_intento)
+            if mensaje[0] == "Hundir":
+                barco_hundido = intentos_realizados[mensaje[1]]
+                coords = [i[0] + i[1] for i in barco_hundido]
+                inicio, fin = coords.index(min(coords)), coords.index(max(coords))
+                barcos[mensaje[1]] = Barcos(barco_hundido[inicio], barco_hundido[fin], blanco)
+                if nombre != self._nombreD_jugador:
+                    self._numero_de_hundidos += 1
+                    if self._numero_de_hundidos == self.cantidadD_barcos_disp:
+                        respuesta = "Finaliza,{}".format(nombre)
+        time.sleep(1)
+        self.cambioD_turno()
+        return respuesta
+
+    def procesaSi_C_une(self, nombre):
+        if not self._nombreD_jugador:
+            self._nombreD_jugador = nombre
+            print("Se unió al juego como jugador {}".format(nombre))
+        else:
+            print("Jugador {} se ha unido al juego".format(nombre))
+
+    def procesaSi_C_sale(self, nombre):
+        print("Jugador {} ha abandonado el juego".format(nombre))
+        self.definir_fase_actual("Termina")
+
+    def procesaSi_listo(self, nombre):
+        if self._juego_listoP_empezar:
+            self._cantidad_de_intentos_validos = self.inicializacionD_diccs_Coordenadas()
+            if self._nombreD_jugador == '1':
+                self.definir_fase_actual("Turno del jugador")
+            else:
+                self.definir_fase_actual("Turno del Oponente")
+        elif nombre == self._nombreD_jugador:
+            self.definir_fase_actual("Esperando")
+        self._juego_listoP_empezar = True
+
+    def _end_game(self, nombre=None):
+        if nombre:
+            self.definir_fase_actual("menu")
+            print("Jugador {} ha ganado el juego".format(nombre))
+
+
+def draw_menu(surface, font, title_font):
+    surface.fill(gris)
+    pygame.draw.rect(surface, blanco,
+                     pygame.Rect((medidas['ventana_ancho_mini'] / 2) - (medidas['ventana_ancho_mini'] / 6),
+                                 (medidas['ventana_alto_mini'] * 11 / 10 / 2) - (medidas['ventana_alto_mini'] / 10),
+                                 medidas['ventana_ancho_mini'] / 3,
+                                 medidas['ventana_alto_mini'] / 5))
+    superficieD_texto, rect = font.render("Conectar a Host", negro)
+    surface.blit(superficieD_texto,
+                 ((medidas['ventana_ancho_mini'] / 2) - (rect.width / 2), (medidas['ventana_alto_mini'] * 11 / 10 / 2) - (rect.height / 2)))
+    superficieD_texto, rect = title_font.render("Botecitos 'El juego'", blanco)
+    surface.blit(superficieD_texto,
+                 ((medidas['ventana_ancho_mini'] / 2) - (rect.width / 2), (medidas['ventana_alto_mini'] / 4) - (rect.height / 2)))
+
+
+
+if __name__ == "__main__":
+    FPS = 30
+    pygame.init()
+    pantalla = pygame.display.set_mode((medidas['ventana_ancho_mini'], int(medidas['ventana_alto_mini'] * 11 / 10)))
+    font = pygame.freetype.SysFont("Courier", 24)
+    title_font = pygame.freetype.SysFont("Courier", 36)
+    pygame.display.set_caption("Botecitos 'El juego'")
+    en_ejecucion = True
+    tablero = None
+    Servidor_cliente = None
+    barquitos_index = 1
+    while en_ejecucion:
+        if tablero:
+            tablero.dibuja_tableros()
+        else:
+            draw_menu(pantalla, font, title_font)
+        pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                en_ejecucion = False
+            if not tablero:
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1 and (
+                            (medidas['ventana_alto_mini'] / 2) - (medidas['ventana_alto_mini'] / 10) <= event.pos[0]
+                            < (medidas['ventana_alto_mini'] / 2) + (medidas['ventana_alto_mini'] / 10)
+                            and (medidas['ventana_ancho_mini'] / 2) - (medidas['ventana_ancho_mini'] / 6)
+                            <= event.pos[1] < (medidas['ventana_ancho_mini'] / 2) + (medidas['ventana_ancho_mini'] / 6)):
+                        tablero = Tablero(pantalla, font)
+                        Servidor_cliente = Server_Client(tablero)
+                        barquitos_index = 1
+            if tablero:
+                if event.type == pygame.MOUSEBUTTONDOWN and tablero.tomar_fase() == "Turno del jugador":
+                    # Enviar conjetura/informacion de turno si es válid@
+                    if event.button == 1:
+                        x, y = int(event.pos[0] / (medidas['ventana_ancho_mini'] / 10)), int(event.pos[1] / (medidas['ventana_alto_mini'] / 10))
+                        if y > 0 and tablero.validacionD_turno((x, y)):
+                            Servidor_cliente.envio_paquetes("Movimiento_Reconocido,{},{}".format(x, y))
+                elif event.type == pygame.KEYDOWN and tablero.tomar_fase() == "Colocación":
+                    if event.key != pygame.K_RETURN:
+                        tablero.mover_barco(str(barquitos_index), event.key)
+                    else:
+                        if tablero.colocar_barco(barquitos_index):
+                            if barquitos_index < 2:
+                                barquitos_index += 1
+                            else:
+                                Servidor_cliente.envio_paquetes("Listo")
+                elif event.type == pygame.MOUSEBUTTONDOWN and tablero.tomar_fase() == "Termina":
+                    if event.button == 1 and (
+                            (medidas['ventana_alto_mini'] / 2) - (medidas['ventana_alto_mini'] / 10) <= event.pos[0]
+                            < (medidas['ventana_alto_mini'] / 2) + (medidas['ventana_alto_mini'] / 10)
+                            and (medidas['ventana_ancho_mini'] / 2) - (medidas['ventana_ancho_mini'] / 6)
+                            <= event.pos[1] < (medidas['ventana_ancho_mini'] / 2) + (medidas['ventana_ancho_mini'] / 6)):
+                        Servidor_cliente.close()
+                        Servidor_cliente = None
+                        tablero = None
+
+    pygame.quit()
